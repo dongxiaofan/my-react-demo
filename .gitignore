@@ -31,6 +31,4 @@ yarn-error.log*
 *.njsproj
 *.sln
 *.sw*
-*.js
-*.ts
-*.tsx
+
