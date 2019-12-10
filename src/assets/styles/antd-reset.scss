@@ -1,0 +1,18 @@
+// 框架样式
+.table-operations{
+  height: 70px;
+  .table-operations-left-test{
+    line-height: 70px;
+    font-weight: bold;
+  }
+}
+
+.search-form{
+  .ant-form{
+    .ant-col{
+      .ant-form-item{
+        margin-bottom: 10px;
+      }
+    }
+  }
+}
