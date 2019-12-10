@@ -1,6 +1,6 @@
 import React from 'react';
 
-class NotFound extends React.Component {
+class Home extends React.Component {
   state = {
     animated: '',
   };
@@ -12,4 +12,4 @@ class NotFound extends React.Component {
   }
 }
 
-export default NotFound;
+export default Home;

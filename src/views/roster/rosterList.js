@@ -116,7 +116,7 @@ class RosterList extends Component {
                   <Col span={8} key={item.key}>
                     <Form.Item label={item.label}>
                       {/* <Select defaultValue="" onChange={this.handleSelectChange(item.key)}> */}
-                      <Select defaultValue="" onChange={(e) => this.handleSelectChange(e, item.key)}>
+                      <Select allowClear defaultValue="" onChange={(e) => this.handleSelectChange(e, item.key)}>
                         {arrListDown[`${item.options}`].map(ops => {
                           return (
                             <Option key={ops.value} value={ops.value}>{ops.label}</Option>
@@ -129,7 +129,7 @@ class RosterList extends Component {
                   return (
                     <Col span={8} key={item.key}>
                       <Form.Item label={item.label}>
-                        <Input placeholder={item.placeholder} name={item.key} value={this.state.formData[item.key]} onChange={this.handleInputChange.bind(this, item.key)}/>
+                        <Input allowClear placeholder={item.placeholder} name={item.key} value={this.state.formData[item.key]} onChange={this.handleInputChange.bind(this, item.key)}/>
                       </Form.Item>
                     </Col>
                   )
