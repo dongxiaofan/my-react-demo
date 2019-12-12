@@ -16,3 +16,14 @@
     }
   }
 }
+
+.base-form{
+  .ant-form{
+    overflow: hidden;
+    .ant-col{
+      .ant-form-item{
+        margin-bottom: 10px;
+      }
+    }
+  }
+}

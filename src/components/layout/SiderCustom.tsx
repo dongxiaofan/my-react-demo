@@ -62,6 +62,7 @@ class SiderCustom extends Component<SiderCustomProps, SiderCustomState> {
   };
   render() {
     const { selectedKey, openKey, firstHide, collapsed } = this.state;
+    const path = this.props.location.pathname;
     return (
       <Sider
         trigger={null}
@@ -70,11 +71,14 @@ class SiderCustom extends Component<SiderCustomProps, SiderCustomState> {
         style={{ overflowY: 'auto' }}
       >
         <div className="logo" />
+        {/* <p className="text-danger">⭐ {[selectedKey]}</p>
+        <p className="text-danger">⭐ {[path]}</p> */}
         <SiderMenu
           menus={routes.menus}
           onClick={this.menuClick}
           mode="inline"
-          selectedKeys={[selectedKey]}
+          // selectedKeys={[selectedKey]}
+          selectedKeys={[path]}
           openKeys={firstHide ? [] : [openKey]}
           onOpenChange={this.openMenu}
         />

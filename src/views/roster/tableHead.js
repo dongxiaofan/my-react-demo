@@ -43,15 +43,6 @@ export const rosterListThead = [
   {
     title: '创建时间',
     dataIndex: 'createTime'
-  },
-  {
-    title: '操作',
-    key: 'action',
-    render: (text, record) => (
-      <span>
-        <a className="mr-10">详情</a>
-        <a>删除</a>
-      </span>
-    )
   }
 ]
+

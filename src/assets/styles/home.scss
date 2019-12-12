@@ -1,0 +1,49 @@
+.home-data-wrap{
+  .ant-row{
+    margin-left: -10px;
+    margin-right: -10px;
+    .ant-col{
+      padding: 0 10px;
+    }
+  }
+  .home-data-item{
+    height: 110px;
+    border-radius: 5px;
+    background: #fff;
+    overflow: hidden;
+    .item-left-area{
+      width: 36%;
+      height: 100%;
+      float: left;
+      display: table;
+      text-align: center;
+      color: #fff;
+      font-size: 42px;
+      line-height: 110px;
+    }
+    .item-right-area{
+      width: 64%;
+      height: 100%;
+      float: left;
+      display: table;
+      text-align: center;
+    }
+  }
+}
+
+.home-echarts-wrap{
+  .ant-row{
+    margin-left: -10px;
+    margin-right: -10px;
+    .ant-col{
+      padding: 0 10px;
+    }
+  }
+  .home-echarts-item{
+    background: #fff;
+    border-radius: 5px;
+    padding: 10px;
+  }
+  .home-echarts-china{
+  }
+}

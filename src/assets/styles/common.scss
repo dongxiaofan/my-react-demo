@@ -15,7 +15,7 @@ $danger: #ff7875;
 
 @for $i from 12 through 120 {
   .font-#{$i} {
-    font-size: #{$i}rpx !important;
+    font-size: #{$i}px !important;
   }
 }
 
@@ -121,6 +121,13 @@ $danger: #ff7875;
 
 .bg-white{
   background: #fff;
+}
+
+.br-5{
+  border-radius: 5px;
+}
+.br-10{
+  border-radius: 10px;
 }
 
 #root{

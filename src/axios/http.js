@@ -35,6 +35,28 @@ function getPromise(url, data, method) {
     })
   })
 }
+
+function getPromise2(url, params, method) {
+  return new Promise((resolve, reject) => {
+    axios.request({
+      url: '/api' + `${url}`,
+      header: getHeader(),
+      method: method,
+      params: params
+    }).then((res) => {
+      if (res.data.code === 403) {
+        message.error(res.data.message)
+        setTimeout(() => {
+          window.location.href = '/login'
+        }, 3000)
+      }
+      resolve(res.data)
+    }).catch((err) => {
+      message.error(err.data.message)
+      reject(err.data)
+    })
+  })
+}
  
 const http = {
   get: function(url, data) {
@@ -42,6 +64,9 @@ const http = {
   },
   post: function(url, data) {
     return getPromise(url, data, 'POST')
+  },
+  post2: function(url, params) {
+    return getPromise2(url, params, 'POST')
   },
   put: function(url, data) {
     return getPromise(url, data, 'PUT')

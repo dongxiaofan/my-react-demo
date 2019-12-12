@@ -31,7 +31,6 @@ class App extends Component<AppProps> {
     // fetchData({funcName: 'admin', stateName: 'auth'});
     this.getClientWidth();
     window.onresize = () => {
-      console.log('屏幕变化了');
       this.getClientWidth();
     };
   }
@@ -69,9 +68,12 @@ class App extends Component<AppProps> {
     return (
       <DocumentTitle title={title}>
         <Layout>
+          {/* 左边 */}
           {!responsive.data.isMobile && checkLogin(auth.data.permissions) && (
             <SiderCustom collapsed={this.state.collapsed} />
           )}
+
+          {/* 右边 */}
           <Layout style={{ flexDirection: 'column' }}>
             <HeaderCustom
               toggle={this.toggle}

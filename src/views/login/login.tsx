@@ -2,10 +2,11 @@ import React from 'react';
 import { connectAlita } from 'redux-alita';
 import { Form, Icon, Input, Button, Checkbox, message } from 'antd'
 import AccountApi from '@/api/Account.api'
+import { any, string } from 'prop-types';
 
 const FormItem = Form.Item;
 
-class Login extends React.Component {
+class Login extends React.Component<any, any> {
 	componentDidMount() {
   }
   
@@ -20,9 +21,9 @@ class Login extends React.Component {
 		}
   }
   
-	handleSubmit = e => {
+	handleSubmit = (e:any) => {
 		e.preventDefault();
-		this.props.form.validateFields((err, values) => {
+		this.props.form.validateFields((err:any, values:any) => {
 			if (!err) {
 				AccountApi.login(values).then(res => {
           console.log('登陆：', res)
@@ -30,7 +31,7 @@ class Login extends React.Component {
 						message.success(res.message)
 						localStorage.setItem('loginReturn', JSON.stringify(res));
             setTimeout(() => {
-              this.props.history.push('/app/roster/rosterList')
+              this.props.history.push('/app/home')
             }, 3000)
           } else {
             message.error(res.message)
@@ -52,7 +53,7 @@ class Login extends React.Component {
       {type: 'input', key: 'password', label: '密码', placeholder: '请输入密码', icon: 'lock'}
     ]
 
-    const rules = {
+    const rules:any = {
       username: [
         { required: true, message: '请输入用户名', whitespace: true, type: 'string' }
       ],
@@ -72,7 +73,7 @@ class Login extends React.Component {
                 {getFieldDecorator(`${item.key}`, {
                   rules: rules[`${item.key}`]
                 })(
-                  <Input prefix={<Icon type={item.icon} placeholder={item.placeholder}/>} />
+                  <Input prefix={<Icon type={item.icon}/>} placeholder={item.placeholder} />
                 )}
               </Form.Item>
             )}

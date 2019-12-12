@@ -11,7 +11,7 @@ export default class EmployeesApi {
   static employeeDimission = (data) => http.delete('/Employee/EmployeeDimission', data)
 
   // 获取单个员工基本信息
-  static getEmployee = (data) => http.post('/Employee/GetEmployee', data)
+  static getEmployee = (data) => http.post2('/Employee/GetEmployee', data)
 
   // 添加或修改员工信息
   static postEmployee = (data) => http.post('/Employee/PostEmployee', data)

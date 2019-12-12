@@ -2,10 +2,17 @@ import React, {Component} from 'react'
 import { Form, Col, Select, Input, Table, Button } from 'antd'
 import EmployeesApi from '@/api/Employees.api'
 import { rosterListThead } from './tableHead'
+import { Link, withRouter} from "react-router-dom"
+
+// type QueryParamsProps = {
+//   query: any;
+// };
 
 const { Option } = Select
+const { Column, ColumnGroup } = Table
+
 const thead = rosterListThead
-const arrListDown = {
+const arrListDown:any = {
   isBeHiring: [{ label: '在职', value: 'true' }, { label: '离职', value: 'false' }]
 }
 const formItem = [
@@ -15,8 +22,8 @@ const formItem = [
   {type: 'input', key: 'idCardNo', label: '身份证号码', placeholder: '请输入身份证号码'}
 ]
 
-class RosterList extends Component {
-  state = {
+class RosterList extends Component<any,any> {
+  state:any = {
     tableData: [],
     tableComone: {        
       pageIndex: 1, // 页码
@@ -31,8 +38,9 @@ class RosterList extends Component {
     }
   }
 
-  constructor(props) {
+  constructor(props:any) {
     super(props)
+    console.log('RosterList props 🧞‍ ', props)
     this.query()
   }
 
@@ -47,7 +55,7 @@ class RosterList extends Component {
   }
 
   // 点击分页
-  async handleTableChange (page) {
+  async handleTableChange (page:any) {
     let tableComone = this.state
     tableComone.pageIndex = page.current
     await this.setState({
@@ -84,7 +92,7 @@ class RosterList extends Component {
   }
 
   // 下拉框改变
-  async handleSelectChange (value, key) {
+  async handleSelectChange (value:any, key:any) {
     let formData = this.state.formData
     formData[key] = value
     await this.setState({
@@ -93,7 +101,7 @@ class RosterList extends Component {
   }
 
   // 输入框数据双向绑定
-  async handleInputChange (key, e) {
+  async handleInputChange (key:any, e:any) {
     let formData = this.state.formData
     formData[key] = e.target.value
     await this.setState({
@@ -101,11 +109,35 @@ class RosterList extends Component {
     })
   }
 
+  // 去往详情
+  goDetail (row):any {
+    console.log('✌✌✌ this.props ', this.props)
+    var path = {
+      pathname:'/app/roster/rosterDetail',
+      query: {id: row.id}
+    }
+    this.props.history.push(path)
+    // this.props.history.push('/app/roster/rosterDetail')
+    localStorage.setItem('currentRosterItem', JSON.stringify(row))
+  }
+
+
   render () {
     const formItemLayout = {
       labelCol: { span: 4 },
       wrapperCol: { span: 20 },
     }
+    var action:any = {
+      title: '操作aaa',
+      key: 'action',
+      render: (text, record) => (
+        <span>
+          <a className="mr-10" onClick={(e)=>this.goDetail(record)}>详情</a>
+          <a onClick={(e)=>this.goDetail(record)}>删除</a>
+        </span>
+      )
+    }
+    const columns = thead.concat(action)
     return (
       <div className="cont-wrap">
         <div className="search-form clearfix mb-20">
@@ -115,9 +147,8 @@ class RosterList extends Component {
                 return (
                   <Col span={8} key={item.key}>
                     <Form.Item label={item.label}>
-                      {/* <Select defaultValue="" onChange={this.handleSelectChange(item.key)}> */}
-                      <Select allowClear defaultValue="" onChange={(e) => this.handleSelectChange(e, item.key)}>
-                        {arrListDown[`${item.options}`].map(ops => {
+                      <Select allowClear defaultValue="" onChange={(e:any) => this.handleSelectChange(e, item.key)}>
+                        {arrListDown[`${item.options}`].map((ops:any) => {
                           return (
                             <Option key={ops.value} value={ops.value}>{ops.label}</Option>
                           )
@@ -136,7 +167,7 @@ class RosterList extends Component {
                 }
             })}
             <Col span={6} className="pt-4">
-              <Button type="primary" className="ml-20" onClick={(e) => this.searchFn(e)}>查询</Button>
+              <Button type="primary" className="ml-20" onClick={e => this.searchFn()}>查询</Button>
             </Col>
           </Form>
         </div>
@@ -146,17 +177,19 @@ class RosterList extends Component {
             <div className="table-operations-left-test">合计<span className="text-danger">{this.state.tableComone.totalRows}</span>条</div>
           </div>
           <Table
-            columns={thead}
+            columns={columns}
             dataSource={this.state.tableData}
             rowKey={record => record.id}
             pagination={{total: this.state.tableComone.totalRows}}
-            onChange={(e) => this.handleTableChange(e)}
-          />
+            onChange={(e:any) => this.handleTableChange(e)}
+          >
+          </Table>
         </div>
       </div>
     )
   }
 }
 
-export default RosterList
+// export default RosterList
+export default withRouter(RosterList)
 
