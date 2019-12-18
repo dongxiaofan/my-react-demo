@@ -119,7 +119,8 @@ let urlParams = {}
 class RosterDetail extends Component<any,any> {
   state:any = {
     basicInfo: {},
-    formBasicData: {}
+    formBasicData: {},
+    canEdit: false
   }
 
   constructor(props:any) {
@@ -138,6 +139,8 @@ class RosterDetail extends Component<any,any> {
     console.log('🧞‍ arrListDown： ', arrListDown)
     let tempAreaTree:any = localStorage.getItem('areaTree')
     areaTree = JSON.parse(tempAreaTree)
+
+    this.state.canEdit = urlParams['isEdit'] == 'true' ? true : false
 
     this.getEnum()
     this.query()
@@ -254,6 +257,10 @@ class RosterDetail extends Component<any,any> {
     }
   }
 
+  goBack () {
+    this.props.history.push('/app/roster/rosterList')
+  }
+
   render () {
     const formItemLayout = {
       labelCol: { span: 8 },
@@ -261,7 +268,8 @@ class RosterDetail extends Component<any,any> {
     }
 
     return (
-      <div className="cont-wrap">
+      <div className={urlParams['isEdit'] == 'true' ? 'cont-wrap' : 'has-disabled cont-wrap'}>
+        <div className="public-title">基本信息</div>
         <div className="base-form bg-white pl-20 pr-50 pt-30 pb-20 br-5">
           <Form {...formItemLayout}>
             {formBasicInfoItem.map(item => {
@@ -269,7 +277,7 @@ class RosterDetail extends Component<any,any> {
                 return (
                   <Col span={6} key={item.model}>
                     <Form.Item label={item.label}>
-                      <Select allowClear value={this.state.formBasicData[item.model]} onChange={(e:any) => this.handleSelectChange(e, item.model)}>
+                      <Select allowClear placeholder={this.state.canEdit ? item.placeholder : '未选择'} value={this.state.formBasicData[item.model]} onChange={(e:any) => this.handleSelectChange(e, item.model)} disabled={!this.state.canEdit}>
                         {arrListDown[`${item.options}`].map((ops:any) => {
                           return (
                             <Option key={ops.value} value={ops.value}>{ops.label}</Option>
@@ -282,7 +290,7 @@ class RosterDetail extends Component<any,any> {
                   return (
                     <Col span={6} key={item.model}>
                       <Form.Item label={item.label}>
-                        <Cascader options={areaTree} placeholder={item.placeholder} value={this.state.formBasicData[item.model]} onChange={(value, selectedOptions) => this.handleCascaderChange(value, selectedOptions, item.model)}>
+                        <Cascader options={areaTree} placeholder={this.state.canEdit ? item.placeholder : '未选择'} value={this.state.formBasicData[item.model]} onChange={(value, selectedOptions) => this.handleCascaderChange(value, selectedOptions, item.model)} disabled={!this.state.canEdit}>
                         </Cascader>
                       </Form.Item>
                     </Col>
@@ -291,7 +299,7 @@ class RosterDetail extends Component<any,any> {
                   return (
                     <Col span={6} key={item.model}>
                       <Form.Item label={item.label}>
-                        <DatePicker format="YYYY/MM/DD" value={moment(this.state.formBasicData[item.model])} onChange={(date, dateString) => this.handleDatePickerChange(date, dateString, item.model)} />
+                        <DatePicker format="YYYY/MM/DD" placeholder={this.state.canEdit ? item.placeholder : '未选择'} value={moment(this.state.formBasicData[item.model])} onChange={(date, dateString) => this.handleDatePickerChange(date, dateString, item.model)} disabled={!this.state.canEdit} />
                       </Form.Item>
                     </Col>
                   )
@@ -299,7 +307,7 @@ class RosterDetail extends Component<any,any> {
                   return (
                     <Col span={6} key={item.model}>
                       <Form.Item label={item.label}>
-                        <Input allowClear placeholder={item.placeholder} name={item.model} value={this.state.formBasicData[item.model]} onChange={this.handleInputChange.bind(this, item.model)} />
+                        <Input allowClear placeholder={this.state.canEdit ? item.placeholder : '未填写'} name={item.model} value={this.state.formBasicData[item.model]} onChange={this.handleInputChange.bind(this, item.model)} disabled={!this.state.canEdit} />
                       </Form.Item>
                     </Col>
                   )
@@ -309,7 +317,12 @@ class RosterDetail extends Component<any,any> {
         </div>
         
         <div className="text-center pt-20">
-          <Button type="primary" className="ml-20" onClick={e => this.handleSubmit()}>提交</Button>
+          {
+            this.state.canEdit ?
+            <Button type="primary" onClick={e => this.handleSubmit()}>提交</Button>
+            :
+            <Button type="default" onClick={e => this.goBack()}>返回</Button>
+          }
         </div>
       </div>
     )

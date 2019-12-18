@@ -8,7 +8,7 @@ import { MenuProps } from 'antd/lib/menu';
 const renderMenuItem = (
   item: IFMenu // item.route 菜单单独跳转的路由
 ) => (
-    <Menu.Item key={item.key}>
+    <Menu.Item key={item.key} className={item.hidden == true?"display-none":''}>
       <Link to={(item.route || item.key) + (item.query || '')}>
         {item.icon && <Icon type={item.icon} />}
         <span className="nav-text">{item.title}</span>

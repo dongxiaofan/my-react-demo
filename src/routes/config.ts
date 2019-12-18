@@ -2,6 +2,7 @@ export interface IFMenuBase {
   key: string;
   title: string;
   icon?: string;
+  hidden?: boolean;
   component?: string;
   query?: string;
   auth?: string;
@@ -28,9 +29,8 @@ const menus: {
       icon: 'profile',
       subs: [
         { key: '/app/roster/rosterList', title: '花名册', component: 'Roster' },
-        { key: '/app/roster/rosterDetail', title: '员工详情', component: 'RosterDetail' }
-        // { key: '/app/roster/rosterDetail', title: '员工详情', component: 'RosterDetail' }
-      ],
+        { key: '/app/roster/rosterDetail', title: '员工详情', component: 'RosterDetail', hidden: true }
+      ]
     }
   ],
   others: [], // 非菜单相关路由

@@ -111,15 +111,13 @@ class RosterList extends Component<any,any> {
   }
 
   // 去往详情
-  goDetail (row):any {
-    console.log('✌✌✌ this.props ', this.props)
-    // var path = {
-    //   pathname:'/app/roster/rosterDetail',
-    //   query: {id: row.id}
-    // }
-    // this.props.history.push(path)
-    this.props.history.push('/app/roster/rosterDetail?id=' + row.id)
-    localStorage.setItem('currentRosterItem', JSON.stringify(row))
+  goDetail (row, isEdit):any {
+    if (isEdit) {
+      this.props.history.push('/app/roster/rosterDetail?id=' + row.id + '&isEdit=true')
+    } else {      
+      this.props.history.push('/app/roster/rosterDetail?id=' + row.id)
+    }
+    // localStorage.setItem('currentRosterItem', JSON.stringify(row))
   }
 
 
@@ -133,8 +131,9 @@ class RosterList extends Component<any,any> {
       key: 'action',
       render: (text, record) => (
         <span>
-          <a className="mr-10" onClick={(e)=>this.goDetail(record)}>详情</a>
-          <a onClick={(e)=>this.goDetail(record)}>删除</a>
+          <a className="mr-10" onClick={(e)=>this.goDetail(record, false)}>详情</a>
+          <a className="mr-10" onClick={(e)=>this.goDetail(record, true)}>编辑</a>
+          <a>删除</a>
         </span>
       )
     }
