@@ -127,7 +127,7 @@ class RosterList extends Component<any,any> {
       wrapperCol: { span: 20 },
     }
     var action:any = {
-      title: '操作aaa',
+      title: '操作',
       key: 'action',
       render: (text, record) => (
         <span>

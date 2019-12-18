@@ -97,9 +97,6 @@ const formBasicInfoItem = [
 ]
 
 const arrListDown:any = {
-  tempOps: [{ label: 'aaa', value: '111' }, { label: 'bbb', value: '222' }],
-  // isBeHiring: [{ label: '在职', value: 'true' }, { label: '离职', value: 'false' }],
-  // securitytype: []
   cityId: [],
   booleanJudge: [{ value: 'true', label: '是' }, { value: 'false', label: '否' }],
   tempOptions: [{ value: 0, label: '选项1' }, { value: 1, label: '选项2' }],
@@ -319,9 +316,13 @@ class RosterDetail extends Component<any,any> {
         <div className="text-center pt-20">
           {
             this.state.canEdit ?
-            <Button type="primary" onClick={e => this.handleSubmit()}>提交</Button>
+            <span>
+              <Button type="primary" onClick={e => this.handleSubmit()}>提交</Button>
+              <Button type="default" onClick={e => this.goBack()} className="ml-20">返回</Button>
+            </span>
             :
             <Button type="default" onClick={e => this.goBack()}>返回</Button>
+            
           }
         </div>
       </div>
