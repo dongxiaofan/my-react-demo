@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import { Form, Col, Select, Input, Table, Button } from 'antd'
+import { Form, Col, Select, Input, Table, Button, Popconfirm, message } from 'antd'
 import EmployeesApi from '@/api/Employees.api'
 import { rosterListThead } from './tableHead'
 import { Link, withRouter} from "react-router-dom"
@@ -117,8 +117,23 @@ class RosterList extends Component<any,any> {
     } else {      
       this.props.history.push('/app/roster/rosterDetail?id=' + row.id)
     }
-    // localStorage.setItem('currentRosterItem', JSON.stringify(row))
   }
+
+  async isSureDelete (record) {
+    console.log('🧞‍ 点击了确认删除: ', record)
+    let res = await EmployeesApi.deleteEmployee({ id: record.id })
+      console.log('res: ', res)
+      if (res.code === 200 && res.success) {
+        message.success(res.message)
+        this.query()
+      } else {
+        message.error({
+          content: res.message,
+          // duration: 0,
+          closable: true
+        })
+      }
+  };
 
 
   render () {
@@ -133,7 +148,15 @@ class RosterList extends Component<any,any> {
         <span>
           <a className="mr-10" onClick={(e)=>this.goDetail(record, false)}>详情</a>
           <a className="mr-10" onClick={(e)=>this.goDetail(record, true)}>编辑</a>
-          <a>删除</a>
+          {/* <a onClick={(e)=>this.isDeleteModal(record)}>删除</a> */}
+          <Popconfirm
+            title="是否确定删除？"
+            onConfirm={(e)=>this.isSureDelete(record)}
+            okText="确认"
+            cancelText="取消"
+          >
+            <a href="#">删除</a>
+          </Popconfirm>
         </span>
       )
     }
