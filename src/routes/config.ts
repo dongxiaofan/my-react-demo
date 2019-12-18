@@ -28,8 +28,8 @@ const menus: {
       icon: 'profile',
       subs: [
         { key: '/app/roster/rosterList', title: '花名册', component: 'Roster' },
-        // { key: '/app/roster/rosterDetail/:id', title: '员工详情', component: 'RosterDetail' }
         { key: '/app/roster/rosterDetail', title: '员工详情', component: 'RosterDetail' }
+        // { key: '/app/roster/rosterDetail', title: '员工详情', component: 'RosterDetail' }
       ],
     }
   ],

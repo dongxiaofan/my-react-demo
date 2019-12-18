@@ -14,7 +14,7 @@ function getHeader() {
   }
 }
 
-function getPromise(url, data, method) {
+function getPromiseOfData(url, data, method) {
   return new Promise((resolve, reject) => {
     axios.request({
       url: '/api' + `${url}`,
@@ -22,11 +22,11 @@ function getPromise(url, data, method) {
       method: method,
       data: data
     }).then((res) => {
-      if (res.data.code === 403) {
+      if (+res.data.code === 403) {
         message.error(res.data.message)
         setTimeout(() => {
           window.location.href = '/login'
-        }, 3000)
+        }, 2000)
       }
       resolve(res.data)
     }).catch((err) => {
@@ -36,15 +36,15 @@ function getPromise(url, data, method) {
   })
 }
 
-function getPromise2(url, params, method) {
+function getPromiseOfParam(url, data, method) {
   return new Promise((resolve, reject) => {
     axios.request({
       url: '/api' + `${url}`,
       header: getHeader(),
       method: method,
-      params: params
+      params: data
     }).then((res) => {
-      if (res.data.code === 403) {
+      if (+res.data.code === 403) {
         message.error(res.data.message)
         setTimeout(() => {
           window.location.href = '/login'
@@ -60,19 +60,19 @@ function getPromise2(url, params, method) {
  
 const http = {
   get: function(url, data) {
-    return getPromise(url, data, 'GET')
+    return getPromiseOfParam(url, data, 'GET')
   },
   post: function(url, data) {
-    return getPromise(url, data, 'POST')
+    return getPromiseOfData(url, data, 'POST')
   },
-  post2: function(url, params) {
-    return getPromise2(url, params, 'POST')
+  postParams: function(url, data) {
+    return getPromiseOfParam(url, data, 'POST')
   },
   put: function(url, data) {
-    return getPromise(url, data, 'PUT')
+    return getPromiseOfData(url, data, 'PUT')
   },
   delete: function(url, data) {
-    return getPromise(url, data, 'DELETE')
+    return getPromiseOfData(url, data, 'DELETE')
   }
 }
  

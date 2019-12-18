@@ -2,6 +2,7 @@ import React from 'react';
 import { connectAlita } from 'redux-alita';
 import { Form, Icon, Input, Button, Checkbox, message } from 'antd'
 import AccountApi from '@/api/Account.api'
+import SysAreaApi from '@/api/SysArea.api'
 import { any, string } from 'prop-types';
 
 const FormItem = Form.Item;
@@ -29,7 +30,11 @@ class Login extends React.Component<any, any> {
           console.log('登陆：', res)
           if (res.success) {
 						message.success(res.message)
-						localStorage.setItem('loginReturn', JSON.stringify(res));
+						localStorage.setItem('loginReturn', JSON.stringify(res))
+
+						this.getProvince()
+						this.getAreaTree()
+
             setTimeout(() => {
               this.props.history.push('/app/home')
             }, 3000)
@@ -43,7 +48,25 @@ class Login extends React.Component<any, any> {
 				console.log('🌼 🌼 🌼 🌼');
 			}
 		});
-	};
+	}	
+
+  // 获取全国省份
+  async getProvince () {
+    let res = await SysAreaApi.getProvince()
+    if (res.success) {
+      localStorage.setItem('provinceList', JSON.stringify(res.data))
+    }
+  }
+
+  // 获取中国所有城市树
+  async getAreaTree () {
+    let res = await SysAreaApi.getAreaTree()
+    console.log('获取中国所有城市树: ', res)
+    if (res.success) {
+      localStorage.setItem('areaTree', JSON.stringify(res.data))
+    } else {
+    }
+  }
 
 	render() {
     const { getFieldDecorator } = this.props.form

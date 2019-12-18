@@ -101,7 +101,8 @@ class RosterList extends Component<any,any> {
   }
 
   // 输入框数据双向绑定
-  async handleInputChange (key:any, e:any) {
+  async handleInputChange (key, e) {
+    console.log('💀 key: ', key, ', 💀 e: ', e)
     let formData = this.state.formData
     formData[key] = e.target.value
     await this.setState({
@@ -112,12 +113,12 @@ class RosterList extends Component<any,any> {
   // 去往详情
   goDetail (row):any {
     console.log('✌✌✌ this.props ', this.props)
-    var path = {
-      pathname:'/app/roster/rosterDetail',
-      query: {id: row.id}
-    }
-    this.props.history.push(path)
-    // this.props.history.push('/app/roster/rosterDetail')
+    // var path = {
+    //   pathname:'/app/roster/rosterDetail',
+    //   query: {id: row.id}
+    // }
+    // this.props.history.push(path)
+    this.props.history.push('/app/roster/rosterDetail?id=' + row.id)
     localStorage.setItem('currentRosterItem', JSON.stringify(row))
   }
 
