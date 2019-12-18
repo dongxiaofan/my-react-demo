@@ -72,8 +72,8 @@ class Login extends React.Component<any, any> {
     const { getFieldDecorator } = this.props.form
 
     const formItem = [
-      {type: 'input', key: 'username', label: '用户名', placeholder: '请输入用户名', icon: 'user'},
-      {type: 'input', key: 'password', label: '密码', placeholder: '请输入密码', icon: 'lock'}
+      {type: 'input', model: 'username', label: '用户名', placeholder: '请输入用户名', icon: 'user'},
+      {type: 'input', model: 'password', label: '密码', placeholder: '请输入密码', icon: 'lock'}
     ]
 
     const rules:any = {
@@ -92,9 +92,9 @@ class Login extends React.Component<any, any> {
 
 					<Form onSubmit={this.handleSubmit}>
             {formItem.map(item =>
-              <Form.Item key={item.key}>
-                {getFieldDecorator(`${item.key}`, {
-                  rules: rules[`${item.key}`]
+              <Form.Item key={item.model}>
+                {getFieldDecorator(`${item.model}`, {
+                  rules: rules[`${item.model}`]
                 })(
                   <Input prefix={<Icon type={item.icon}/>} placeholder={item.placeholder} />
                 )}

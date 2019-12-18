@@ -35,6 +35,20 @@ function getEnum (groupName, arr) {
   })
 }
 
+// 数据字典2 (不带.的groupName)
+function getEnum2 (groupName, arr) {
+  let groupArr = groupName.split(',')
+  EnumApi.getEnum({ groupName: groupName }).then(res => {
+    groupArr.map((str, index) => {
+      if (res[index].group.toLowerCase() === str.toLowerCase()) {
+        res[index].items.map(item => {
+          arr[str].push({ label: item.value, value: item.key })
+        })
+      }
+    })
+  })
+}
+
 // 数据字典-用工形式/到款银行
 function getSelectValueList (typeName, arr) {
   let typeArr = typeName.split(',')
@@ -50,5 +64,6 @@ function getSelectValueList (typeName, arr) {
 export default {
   queryUrlParams,
   getEnum,
+  getEnum2,
   getSelectValueList
 }

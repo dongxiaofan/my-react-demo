@@ -31,6 +31,14 @@ const menus: {
         { key: '/app/roster/rosterList', title: '花名册', component: 'Roster' },
         { key: '/app/roster/rosterDetail', title: '员工详情', component: 'RosterDetail', hidden: true }
       ]
+    },
+    {
+      key: '/app/policySupport',
+      title: '政策文件',
+      icon: 'profile',
+      subs: [
+        { key: '/app/roster/policySupportList', title: '政策文件列表', component: 'PolicySupportList' }
+      ]
     }
   ],
   others: [], // 非菜单相关路由

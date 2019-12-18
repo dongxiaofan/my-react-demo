@@ -15,12 +15,12 @@ import { Features } from './echarts/features.js'
 import { any } from 'prop-types';
 
 const dataItem = [
-  { title: '客户总数', key: 'customerTotal', icon: 'database', color: '#2d8cf0' },
-  { title: '人事代理客户', key: 'agentTotal', icon: 'container', color: '#19be6b' },
-  { title: '劳务派遣客户', key: 'laborDispatchTotal', icon: 'profile', color: '#ff9900' },
-  { title: '劳务外包客户', key: 'outsourcingTotal', icon: 'project', color: '#ed3f14' },
-  { title: '在职员工', key: 'inEmployee', icon: 'solution', color: '#e46cbb' },
-  { title: '离职员工', key: 'outEmployee', icon: 'usergroup-delete', color: '#9a66e4' }
+  { title: '客户总数', model: 'customerTotal', icon: 'database', color: '#2d8cf0' },
+  { title: '人事代理客户', model: 'agentTotal', icon: 'container', color: '#19be6b' },
+  { title: '劳务派遣客户', model: 'laborDispatchTotal', icon: 'profile', color: '#ff9900' },
+  { title: '劳务外包客户', model: 'outsourcingTotal', icon: 'project', color: '#ed3f14' },
+  { title: '在职员工', model: 'inEmployee', icon: 'solution', color: '#e46cbb' },
+  { title: '离职员工', model: 'outEmployee', icon: 'usergroup-delete', color: '#9a66e4' }
 ]
 
 interface IJokeList {
@@ -188,13 +188,13 @@ class Home extends Component<any, any> {
           <Row>
             {dataItem.map(item => {
               return (
-                <Col span={4} key={item.key}>
+                <Col span={4} key={item.model}>
                   <div className="home-data-item">
                     <div className="item-left-area" style={{background: item.color}}>
                       <Icon type={item.icon} />
                     </div>
                     <div className="item-right-area">
-                      <div className="font-50">{this.state.statsTotal[item.key]}</div>
+                      <div className="font-50">{this.state.statsTotal[item.model]}</div>
                       <div>{item.title}</div>
                     </div>
                   </div>

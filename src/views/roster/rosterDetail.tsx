@@ -59,41 +59,41 @@ const formBasicData = {
 
 // 员工基本信息item
 const formBasicInfoItem = [
-  { type: 'input', label: '姓名', placeholder: '请输入姓名', prop: 'name', model: 'name', style: 'ivu-col-span-6', fn: 'inputOnBlur' },
-  { type: 'input', label: '英文名', placeholder: '请输入英文名', prop: 'eName', model: 'eName', style: 'ivu-col-span-6' },
-  { type: 'select', label: '证件类型', placeholder: '请选择证件类型', prop: 'idType', model: 'idType', style: 'ivu-col-span-6', options: 'idcardtype', fn: 'idTypeChange' },
-  { type: 'input', label: '证件号码', placeholder: '请输入证件号码', prop: 'idCardNo', model: 'idCardNo', style: 'ivu-col-span-6', fn: 'inputOnBlur' },
-  { type: 'datePicker', label: '出生日期', placeholder: '请选择出生日期', prop: 'birthDay', model: 'birthDay', style: 'ivu-col-span-6' },
-  { type: 'select', label: '性别', placeholder: '请选择性别', prop: 'sex', model: 'sex', style: 'ivu-col-span-6', options: 'sex' },
-  { type: 'input', label: '年龄', placeholder: '请输入年龄', prop: 'age', model: 'age', style: 'ivu-col-span-6' },
-  { type: 'input', label: '民族', placeholder: '请输入民族', prop: 'race', model: 'race', style: 'ivu-col-span-6' },
-  { type: 'input', label: '籍贯', placeholder: '请输入籍贯', prop: 'birthplace', model: 'birthplace', style: 'ivu-col-span-6' },
-  { type: 'datePicker', label: '证件开始时间', placeholder: '请选择证件开始时间', prop: 'idCardStartTime', model: 'idCardStartTime', style: 'ivu-col-span-6' },
-  { type: 'datePicker', label: '证件到期时间', placeholder: '请选择证件到期时间', prop: 'idCardEndTime', model: 'idCardEndTime', style: 'ivu-col-span-6' },
-  { type: 'input', label: '身份证地址', placeholder: '请输入身份证地址', prop: 'idCardAddress', model: 'idCardAddress', style: 'ivu-col-span-6' },
-  { type: 'input', label: '现居住地址', placeholder: '请输入现居住地址', prop: 'residentAddress', model: 'residentAddress', style: 'ivu-col-span-6' },
-  { type: 'input', label: '手机号码', placeholder: '请输入手机号码', prop: 'phone', model: 'phone', style: 'ivu-col-span-6' },
-  { type: 'input', label: 'Email', placeholder: '请输入Email', prop: 'email', model: 'email', style: 'ivu-col-span-6' },
-  { type: 'input', label: '紧急联系人', placeholder: '请输入紧急联系人', prop: 'emergencyContact', model: 'emergencyContact', style: 'ivu-col-span-6' },
-  { type: 'input', label: '紧急联系人电话', placeholder: '请输入紧急联系人电话', prop: 'emergencyContactPhone', model: 'emergencyContactPhone', style: 'ivu-col-span-6' },
-  { type: 'select', label: '婚姻情况', placeholder: '请输入婚姻情况', prop: 'maritalStatus', model: 'maritalStatus', style: 'ivu-col-span-6', options: 'maritalstatus' },
-  { type: 'select', label: '子女情况', placeholder: '请输入子女情况', prop: 'hasChildren', model: 'hasChildren', style: 'ivu-col-span-6', options: 'hasChildrenOps' },
-  { type: 'input', label: '技术职称', placeholder: '请输入技术职称', prop: 'professionalTitle', model: 'professionalTitle', style: 'ivu-col-span-6' },
-  { type: 'select', label: '最高学历', placeholder: '请输入最高学历', prop: 'degree', model: 'degree', style: 'ivu-col-span-6', options: 'degree' },
-  { type: 'input', label: '毕业学校', placeholder: '请输入毕业学校', prop: 'schoolName', model: 'schoolName', style: 'ivu-col-span-6' },
-  { type: 'datePicker', label: '毕业时间', placeholder: '请输入毕业时间', prop: 'graduationDate', model: 'graduationDate', style: 'ivu-col-span-6' },
-  { type: 'input', label: '专业', placeholder: '请输入专业', prop: 'discipline', model: 'discipline', style: 'ivu-col-span-6' },
-  { type: 'datePicker', label: '入职时间', placeholder: '请输入入职时间', prop: 'onBoardingDate', model: 'onBoardingDate', style: 'ivu-col-span-6' },
-  { type: 'input', label: '所属公司', placeholder: '请输入所属公司', prop: 'companyName', model: 'companyName', style: 'ivu-col-span-6', isDisabled: true },
-  { type: 'input', label: '部门', placeholder: '请输入部门', prop: 'department', model: 'department', style: 'ivu-col-span-6' },
-  { type: 'input', label: '职业', placeholder: '请输入职业', prop: 'duty', model: 'duty', style: 'ivu-col-span-6' },
-  { type: 'input', label: '工号', placeholder: '请输入工号', prop: 'employeeNo', model: 'employeeNo', style: 'ivu-col-span-6' },
-  { type: 'select', label: '用工形式', placeholder: '请输入用工形式', prop: 'employeeType', model: 'employeeType', style: 'ivu-col-span-6', options: 'EmploymentForm' },
-  { type: 'select', label: '在职状态', placeholder: '请输入在职状态', prop: 'beHiring', model: 'beHiring', style: 'ivu-col-span-6', options: 'beHiringOps' },
-  { type: 'cascader', label: '所在地区', placeholder: '请选择所在地区', prop: 'city', model: 'city', style: 'ivu-col-span-6', options: 'cityId' },
-  { type: 'input', label: '工资卡名称', placeholder: '请输入工资卡名称', prop: 'accountName', model: 'accountName', parent: 'salaryCard', style: 'ivu-col-span-6', isDisabled: true },
-  { type: 'input', label: '工资卡开户行', placeholder: '请输入工资卡开户行', prop: 'bankName', model: 'bankName', parent: 'salaryCard', style: 'ivu-col-span-6' },
-  { type: 'input', label: '工资卡卡号', placeholder: '请输入工资卡卡号', prop: 'accountNo', model: 'accountNo', parent: 'salaryCard', style: 'ivu-col-span-6' }
+  { type: 'input', label: '姓名', placeholder: '请输入姓名', model: 'name', fn: 'inputOnBlur' },
+  { type: 'input', label: '英文名', placeholder: '请输入英文名', model: 'eName' },
+  { type: 'select', label: '证件类型', placeholder: '请选择证件类型', model: 'idType', options: 'idcardtype', fn: 'idTypeChange' },
+  { type: 'input', label: '证件号码', placeholder: '请输入证件号码', model: 'idCardNo', fn: 'inputOnBlur' },
+  { type: 'datePicker', label: '出生日期', placeholder: '请选择出生日期', model: 'birthDay' },
+  { type: 'select', label: '性别', placeholder: '请选择性别', model: 'sex', options: 'sex' },
+  { type: 'input', label: '年龄', placeholder: '请输入年龄', model: 'age' },
+  { type: 'input', label: '民族', placeholder: '请输入民族', model: 'race' },
+  { type: 'input', label: '籍贯', placeholder: '请输入籍贯', model: 'birthplace' },
+  { type: 'datePicker', label: '证件开始时间', placeholder: '请选择证件开始时间', model: 'idCardStartTime' },
+  { type: 'datePicker', label: '证件到期时间', placeholder: '请选择证件到期时间', model: 'idCardEndTime' },
+  { type: 'input', label: '身份证地址', placeholder: '请输入身份证地址', model: 'idCardAddress' },
+  { type: 'input', label: '现居住地址', placeholder: '请输入现居住地址', model: 'residentAddress' },
+  { type: 'input', label: '手机号码', placeholder: '请输入手机号码', model: 'phone' },
+  { type: 'input', label: 'Email', placeholder: '请输入Email', model: 'email' },
+  { type: 'input', label: '紧急联系人', placeholder: '请输入紧急联系人', model: 'emergencyContact' },
+  { type: 'input', label: '紧急联系人电话', placeholder: '请输入紧急联系人电话', model: 'emergencyContactPhone' },
+  { type: 'select', label: '婚姻情况', placeholder: '请输入婚姻情况', model: 'maritalStatus', options: 'maritalstatus' },
+  { type: 'select', label: '子女情况', placeholder: '请输入子女情况', model: 'hasChildren', options: 'hasChildrenOps' },
+  { type: 'input', label: '技术职称', placeholder: '请输入技术职称', model: 'professionalTitle' },
+  { type: 'select', label: '最高学历', placeholder: '请输入最高学历', model: 'degree', options: 'degree' },
+  { type: 'input', label: '毕业学校', placeholder: '请输入毕业学校', model: 'schoolName' },
+  { type: 'datePicker', label: '毕业时间', placeholder: '请输入毕业时间', model: 'graduationDate' },
+  { type: 'input', label: '专业', placeholder: '请输入专业', model: 'discipline' },
+  { type: 'datePicker', label: '入职时间', placeholder: '请输入入职时间', model: 'onBoardingDate' },
+  { type: 'input', label: '所属公司', placeholder: '请输入所属公司', model: 'companyName', isDisabled: true },
+  { type: 'input', label: '部门', placeholder: '请输入部门', model: 'department' },
+  { type: 'input', label: '职业', placeholder: '请输入职业', model: 'duty' },
+  { type: 'input', label: '工号', placeholder: '请输入工号', model: 'employeeNo' },
+  { type: 'select', label: '用工形式', placeholder: '请输入用工形式', model: 'employeeType', options: 'EmploymentForm' },
+  { type: 'select', label: '在职状态', placeholder: '请输入在职状态', model: 'beHiring', options: 'beHiringOps' },
+  { type: 'cascader', label: '所在地区', placeholder: '请选择所在地区', model: 'city', options: 'cityId' },
+  { type: 'input', label: '工资卡名称', placeholder: '请输入工资卡名称', model: 'accountName', parent: 'salaryCard', isDisabled: true },
+  { type: 'input', label: '工资卡开户行', placeholder: '请输入工资卡开户行', model: 'bankName', parent: 'salaryCard' },
+  { type: 'input', label: '工资卡卡号', placeholder: '请输入工资卡卡号', model: 'accountNo', parent: 'salaryCard' }
 ]
 
 const arrListDown:any = {
@@ -296,7 +296,7 @@ class RosterDetail extends Component<any,any> {
                   return (
                     <Col span={6} key={item.model}>
                       <Form.Item label={item.label}>
-                        <DatePicker format="YYYY/MM/DD" placeholder={this.state.canEdit ? item.placeholder : '未选择'} value={moment(this.state.formBasicData[item.model])} onChange={(date, dateString) => this.handleDatePickerChange(date, dateString, item.model)} disabled={!this.state.canEdit} />
+                        <DatePicker format="YYYY-MM-DD" placeholder={this.state.canEdit ? item.placeholder : '未选择'} value={moment(this.state.formBasicData[item.model])} onChange={(date, dateString) => this.handleDatePickerChange(date, dateString, item.model)} disabled={!this.state.canEdit} />
                       </Form.Item>
                     </Col>
                   )

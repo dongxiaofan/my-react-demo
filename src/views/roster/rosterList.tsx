@@ -16,10 +16,10 @@ const arrListDown:any = {
   isBeHiring: [{ label: '在职', value: 'true' }, { label: '离职', value: 'false' }]
 }
 const formItem = [
-  {type: 'input', key: 'name', label: '姓名', placeholder: '请输入姓名'},
-  {type: 'select', key: 'beHiring', label: '在职状态', placeholder: '请输入在职状态', options: 'isBeHiring'},
-  {type: 'input', key: 'companyName', label: '公司名称', placeholder: '请输入公司名称'},
-  {type: 'input', key: 'idCardNo', label: '身份证号码', placeholder: '请输入身份证号码'}
+  {type: 'input', label: '姓名', placeholder: '请输入姓名', model: 'name' },
+  {type: 'select', label: '在职状态', placeholder: '请输入在职状态', model: 'beHiring', options: 'isBeHiring'},
+  {type: 'input', label: '公司名称', placeholder: '请输入公司名称', model: 'companyName' },
+  {type: 'input', label: '身份证号码', placeholder: '请输入身份证号码', model: 'idCardNo'}
 ]
 
 class RosterList extends Component<any,any> {
@@ -168,9 +168,9 @@ class RosterList extends Component<any,any> {
             {formItem.map(item => {
               if (item.type === 'select') {
                 return (
-                  <Col span={8} key={item.key}>
+                  <Col span={8} key={item.model}>
                     <Form.Item label={item.label}>
-                      <Select allowClear defaultValue="" onChange={(e:any) => this.handleSelectChange(e, item.key)}>
+                      <Select allowClear defaultValue="" onChange={(e:any) => this.handleSelectChange(e, item.model)}>
                         {arrListDown[`${item.options}`].map((ops:any) => {
                           return (
                             <Option key={ops.value} value={ops.value}>{ops.label}</Option>
@@ -181,9 +181,9 @@ class RosterList extends Component<any,any> {
                   </Col>
                 )} else {
                   return (
-                    <Col span={8} key={item.key}>
+                    <Col span={8} key={item.model}>
                       <Form.Item label={item.label}>
-                        <Input allowClear placeholder={item.placeholder} name={item.key} value={this.state.formData[item.key]} onChange={this.handleInputChange.bind(this, item.key)}/>
+                        <Input allowClear placeholder={item.placeholder} name={item.model} value={this.state.formData[item.model]} onChange={this.handleInputChange.bind(this, item.model)}/>
                       </Form.Item>
                     </Col>
                   )

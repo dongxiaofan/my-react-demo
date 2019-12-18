@@ -5,6 +5,7 @@ body {
 
 $primary: #1890ff;
 $danger: #ff7875;
+$warning: #ffb31a;
 
 #root{
   height: 100%;
@@ -60,6 +61,9 @@ $danger: #ff7875;
 }
 .text-danger{
   color: $danger;
+}
+.text-warning{
+  color: $warning;
 }
 
 .m-auto{
