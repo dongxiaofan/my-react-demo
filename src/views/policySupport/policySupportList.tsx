@@ -1,10 +1,14 @@
 import React, {Component} from 'react'
-import { Form, Col, Select, Input, Table, Button, Popconfirm, message, DatePicker } from 'antd'
+import { Form, Col, Select, Input, Icon, Table, Button, Popconfirm, message, DatePicker } from 'antd'
 import PolicySupportApi from '@/api/PolicySupport.api'
 import { PolicySupportThead } from './tableHead'
 import { Link, withRouter} from "react-router-dom"
 import tool from '@/lib/tool'
 import moment from 'moment'
+import ReNameModal from './modal/reNameModal'
+import CreateFileModal from './modal/createFileModal'
+import ImportModal from './modal/importModal'
+import OrganizationUnitTreeModal from './modal/organizationUnitTreeModal'
 
 const { Option } = Select
 const { Column, ColumnGroup } = Table
@@ -35,31 +39,42 @@ class policySupportList extends Component<any,any> {
       createTimeE: '',
       fileType: ''
     },
-    endOpen: false
-  }
+    endOpen: false,
+    currentRow: '',
+    currentFolder: [],
+    PSID: 'local',
+    selectedRowKeys: []
+  };
 
   constructor(props:any) {
     super(props)
-    console.log('policySupportList props 🧞‍ ', props)
     this.getEnum()
     this.query()
-  }
+  };
+
+  reNameModal: any;
+  importModal: any;
+  organizationUnitTreeModal: any;
+  createFileModal: any;
+  onRef = (ref, modal) => { // -> 获取整个Child元素
+    this[modal] = ref
+  };
 
   // 数据字典
   getEnum () {
     let groupName = 'policysupport'
     tool.getEnum2(groupName, arrListDown)
-  }
+  };
 
   // 查询
-  async searchFn () {
-    let tableComone = this.state.tableComone
+  searchFn = () => {
+    let {tableComone} = this.state
     tableComone.pageIndex = 1
-    await this.setState({
+    this.setState({
       tableComone
     })
     this.query()
-  }
+  };
 
   // 点击分页
   async handleTableChange (page:any) {
@@ -69,11 +84,11 @@ class policySupportList extends Component<any,any> {
       tableComone
     })
     this.query()
-  }
+  };
   
   // 获取列表数据
   async query () {
-    let tableComone = this.state.tableComone
+    let {initTableData, tableData, tableComone, currentFolder, selectedRowKeys} = this.state
     var params = {
       fileName: this.state.formData.fileName,
       createrName: this.state.formData.createrName,
@@ -87,12 +102,28 @@ class policySupportList extends Component<any,any> {
     let res = await PolicySupportApi.getPolicySupportList(params)
     if (res.code === 200 && res.success) {
       tableComone.totalRows = res.totalRows
+      initTableData = res.data
+      tableData = res.data
+      selectedRowKeys = []      
+
       this.setState({
-        tableData: res.data,
-        tableComone
+        initTableData,
+        tableData,
+        tableComone,
+        selectedRowKeys
+      })
+
+      console.log('🐻🐻🐻 query - currentFolder：', currentFolder)
+      res.data.map(row => {
+        row.downLoadUrl = '/api/PolicySupport/DownloadFile?id=' + row.id
+        if (currentFolder.length > 0) {
+          var parentId = currentFolder[currentFolder.length - 1].parentId
+          var fileName = currentFolder[currentFolder.length - 1].fileName
+          this.handleChangeFolder(currentFolder.length - 1, parentId, fileName)
+        }
       })
     }
-  }
+  };
 
   // 下拉框改变
   async handleSelectChange (value:any, key:any) {
@@ -101,17 +132,16 @@ class policySupportList extends Component<any,any> {
     await this.setState({
       formData
     })
-  }
+  };
 
   // 输入框数据双向绑定
   async handleInputChange (key, e) {
-    console.log('💀 key: ', key, ', 💀 e: ', e)
     let formData = this.state.formData
     formData[key] = e.target.value
     await this.setState({
       formData
     })
-  }
+  };
 
   // 时间选择
   async handleDatePickerChange (date, dateString, model) {
@@ -120,7 +150,7 @@ class policySupportList extends Component<any,any> {
     await this.setState({
       formData
     })
-  }
+  };
 
   // 起始时间选择 start
   disabledStartDate = createTimeS => {
@@ -163,27 +193,165 @@ class policySupportList extends Component<any,any> {
 
   handleDateEndOpenChange = open => {
     this.setState({ endOpen: open });
-  }
+  };
   // 起始时间选择 end
 
+  // 下载
+  handleDownloadFile = (id) => {
+    PolicySupportApi.downloadFile({ id: id }).then(res => {
+      if (res.code === 200 && res.success) {
+        window.open(res.message, '_blank')
+      } else {
+        message.error(res.message)
+      }
+    })
+  };
+
+  // 回到根目录
+  backInitTable () {
+    this.setState({
+      tableData: this.state.initTableData,
+      currentFolder: [],
+      PSID: 'local'
+    })
+  };
+
+  // 打开文件夹
+  handleFolder = (row) => {
+    let {currentFolder, tableData, initTableData} = this.state
+    let folderItem = {
+      fileName: row.fileName,
+      parentId: row.id,
+      type: row.type
+    }
+    currentFolder.push(folderItem)
+    tableData = row.childs
+    this.setState({
+      tableData,
+      currentFolder
+    })
+    this.changePSID(this.state.currentFolder)
+  };
+
+  handleChangeFolder = (folderIndex, parentId, fileName) => {
+    let { currentFolder, initTableData } = this.state
+    currentFolder.length = folderIndex + 1
+    this.setState({
+      currentFolder
+    })
+    this.getParents(initTableData, parentId)
+    this.changePSID(currentFolder)
+  };
+
+  // 查找父级
+  getParents (data, id) {
+    for (var i in data) {
+      if (data[i].id == id) {
+        this.state.tableData = data[i].childs
+        return data[i].childs
+      }
+      if (data[i].childs) {
+        var ro = this.getParents(data[i].childs, id)
+        if (ro !== undefined) {
+          return ro.concat(data[i].id)
+        }
+      }
+    }
+  };
+
+  changePSID = (currentFolder) => {
+    this.setState({
+      PSID: currentFolder[currentFolder.length - 1].parentId
+    })
+  };
+
+  // 确认批量删除
+  isSureDelete = () => {
+    PolicySupportApi.deletePolicySupport(this.state.selectedRowKeys).then(res => {
+      message.success(res.message)
+      this.query()
+    }).catch(err => {
+      message.error(err.message)
+    })
+  };
+
+  // 表格选择改变
+  onSelectChange = (selectedRowKeys) => {
+    this.setState({ selectedRowKeys });
+  };
+
+  // 重命名-显示弹窗
+  handleShowReNameModal = (id) => {
+    this.reNameModal.showModal(id) // -> 通过this.child可以拿到child所有状态和方法
+  };
+
+  // 文件上传-显示弹窗
+  handleShowImportModal = () => {
+    this.importModal.showModal()
+  };
+
+  // 文件共享-显示弹窗
+  handleShowOrganizationUnitTreeModal = () => {
+    this.organizationUnitTreeModal.showModal()
+  };  
+
+  // 确认批量取消共享
+  isSureUnFileShare = () => {
+    PolicySupportApi.unFileShare({ids: this.state.selectedRowKeys}).then(res => {
+      message.success(res.message)
+      this.query()
+    }).catch(err => {
+      message.error(err.message)
+    })
+  };
+
+  // 新建文件夹-显示弹窗
+  handleShowCreateFileModal = () => {
+    this.createFileModal.showModal()
+  };
 
   render () {
     const formItemLayout = {
       labelCol: { span: 4 },
       wrapperCol: { span: 20 },
     }
-    var action:any = {
+    const fileName:any = {
+      title: '文件名',
+      key: 'fileName',
+      render: (record: any, index: number) => {
+        return record.type === 2 ? (
+          <a onClick={() => this.handleFolder(record)}>
+            <Icon type="folder-open" theme="filled" className="pr-10 font-24 text-warning" />
+            <span>{record.fileName}</span>
+          </a>
+        ) : <span>{record.fileName}</span>
+      }
+    }
+    const action:any = {
       title: '操作',
       key: 'action',
       render: (text, record) => (
         <span>
-          <a className="mr-10">重命名</a>
-          <a>下载</a>
+          <a className="mr-10" onClick={() => this.handleShowReNameModal(record.id)}>重命名</a>
+          <a onClick={() => this.handleDownloadFile(record.id)}>下载</a>
         </span>
       )
     }
-    const columns = thead.concat(action)
-    const { formData, endOpen } = this.state
+    const columns = thead.concat(fileName, action)
+    // const columns = [...fileName, ...thead, ...action]
+    const { formData, endOpen, selectedRowKeys } = this.state  
+
+    const rowSelection = {
+      selectedRowKeys,
+      onChange: this.onSelectChange
+      // onChange: (selectedRowKeys) => {
+      //   console.log(`selectedRowKeys: ${selectedRowKeys}`)
+      //   this.setState({
+      //     selectedRowKeys: selectedRowKeys
+      //   })
+      // }
+    }
+
     return (
       <div className="cont-wrap">
         <div className="search-form clearfix mb-20">
@@ -245,13 +413,52 @@ class policySupportList extends Component<any,any> {
 
         <div className="bg-white pl-20 pr-20">
           <div className="table-operations">
-            <div className="table-operations-left-test pull-left">合计<span className="text-danger">{this.state.tableComone.totalRows}</span>条</div>
+            {/* <div className="table-operations-left-test pull-left">合计<span className="text-danger">{this.state.tableComone.totalRows}</span>条</div> */}
+            <div className="table-operations-left-test pull-left">
+              <div className="pull-left">
+                <a onClick={() => this.backInitTable()}>根目录</a>
+                <Icon type="right" className="font-12 pl-4 pr-4"/>
+              </div>
+              {
+                this.state.currentFolder.map((folder,folderIndex) => {
+                  return (
+                    folderIndex !== this.state.currentFolder.length - 1 ?
+                    <div className="pull-left" key={folder['fileName']} onClick={() => this.handleChangeFolder(folderIndex, folder.parentId, folder.fileName)}>
+                      <a>{folder.fileName}</a>
+                      <Icon type="right" className="font-12 pl-4 pr-4"/>
+                    </div>
+                    :
+                    <div className="pull-left" key={folder['fileName']}>
+                      <span>{folder.fileName}</span>
+                    </div>
+                  )
+                })
+              }
+            </div>
             <div className="pull-right pt-18">
-              <Button type="primary" className="mr-10">文件上传</Button>
-              <Button type="danger" ghost className="mr-10">删除</Button>
-              <Button type="primary" className="mr-10">新建文件夹</Button>
-              <Button type="primary" ghost className="mr-10">文件共享</Button>
-              <Button className="">取消共享</Button>
+              <Button type="primary" className="mr-10" onClick={() => this.handleShowImportModal()}>文件上传</Button>
+              {/* <Button type="danger" ghost className="mr-10" disabled={this.state.selectedRowKeys.length <= 0}>删除</Button> */}
+              <Popconfirm
+                title="是否确定删除？"
+                onConfirm={(e)=>this.isSureDelete()}
+                okText="确认"
+                cancelText="取消"
+                className="mr-10"
+              >
+                <Button type="danger" ghost disabled={this.state.selectedRowKeys.length <= 0}>删除</Button>
+              </Popconfirm>
+              <Button type="primary" className="mr-10" onClick={() => this.handleShowCreateFileModal()}>新建文件夹</Button>
+              <Button type="primary" ghost className="mr-10" disabled={this.state.selectedRowKeys.length <= 0} onClick={() => this.handleShowOrganizationUnitTreeModal()}>文件共享</Button>
+              {/* <Button className="" disabled={this.state.selectedRowKeys.length <= 0}>取消共享</Button> */}
+              <Popconfirm
+                title="是否取消共享？"
+                onConfirm={(e)=>this.isSureUnFileShare()}
+                okText="确认"
+                cancelText="取消"
+                className="mr-10"
+              >
+                <Button type="danger" ghost disabled={this.state.selectedRowKeys.length <= 0}>取消共享</Button>
+              </Popconfirm>
             </div>
           </div>
           <Table
@@ -260,9 +467,16 @@ class policySupportList extends Component<any,any> {
             rowKey={record => record.id}
             pagination={{total: this.state.tableComone.totalRows}}
             onChange={(e:any) => this.handleTableChange(e)}
+            rowSelection={rowSelection}
           >
           </Table>
         </div>
+      
+        {/* 弹窗 */}
+        <ReNameModal onRef={(ref) => this.onRef(ref, 'reNameModal')} query={this.searchFn} />
+        <ImportModal onRef={(ref) => this.onRef(ref, 'importModal')} query={this.searchFn} PSID={this.state.PSID}/>
+        <OrganizationUnitTreeModal onRef={(ref) => this.onRef(ref, 'organizationUnitTreeModal')} query={this.searchFn} ids={this.state.selectedRowKeys}/>
+        <CreateFileModal onRef={(ref) => this.onRef(ref, 'createFileModal')} query={this.searchFn} PSID={this.state.PSID}/>
       </div>
     )
   }

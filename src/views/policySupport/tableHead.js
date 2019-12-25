@@ -2,20 +2,20 @@ import React from 'react'
 import { Icon } from 'antd'
 
 export const PolicySupportThead = [
-  {
-    title: '文件名称',
-    dataIndex: 'fileName',
-    render: (text, record, index) => {
-      return record.type === 2 ? (
-        <span>
-          <Icon type="folder-open" theme="filled" className="pr-10 font-24 text-warning" />
-          <span>{record.fileName}</span>
-        </span>
-      ) : (
-        <span>{record.fileName}</span>
-      );
-    },
-  },
+  // {
+  //   title: '文件名称',
+  //   dataIndex: 'fileName',
+  //   render: (text, record, index) => {
+  //     return record.type === 2 ? (
+  //       <a onClick={() => this.handleFolder(index, record)}>
+  //         <Icon type="folder-open" theme="filled" className="pr-10 font-24 text-warning" />
+  //         <span>{text}</span>
+  //       </a>
+  //     ) : (
+  //       <span>{text}</span>
+  //     );
+  //   },
+  // },
   {
     title: '文件大小',
     dataIndex: 'fileSize'

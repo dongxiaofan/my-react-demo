@@ -5,10 +5,10 @@ export default class EmployeesApi {
   static getEmployeeListNew = (data) => http.post('/Employee/GetEmployeeListNew', data)
 
   // 删除员工
-  static deleteEmployee = (data) => http.delete('/Employee/DeleteEmployee', data)
+  static deleteEmployee = (data) => http.deleteParams('/Employee/DeleteEmployee', data)
 
   // 离职
-  static employeeDimission = (data) => http.delete('/Employee/EmployeeDimission', data)
+  static employeeDimission = (data) => http.deleteParams('/Employee/EmployeeDimission', data)
 
   // 获取单个员工基本信息
   static getEmployee = (data) => http.postParams('/Employee/GetEmployee', data)

@@ -71,8 +71,11 @@ const http = {
   put: function(url, data) {
     return getPromiseOfData(url, data, 'PUT')
   },
-  delete: function(url, data) {
+  deleteParams: function(url, data) {
     return getPromiseOfParam(url, data, 'DELETE')
+  },
+  delete: function(url, data) {
+    return getPromiseOfData(url, data, 'DELETE')
   }
 }
  

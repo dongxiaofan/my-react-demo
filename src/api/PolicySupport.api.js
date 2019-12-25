@@ -14,10 +14,10 @@ export default class PolicySupportApi {
   static deletePolicySupport = (data) => http.delete('/PolicySupport/DeletePolicySupport', data)
 
   // 新建文件夹
-  static CreateDir = (data) => http.post('/PolicySupport/CreateDir', data)
+  static createDir = (data) => http.postParams('/PolicySupport/CreateDir', data)
 
   // 下载文件
-  static downloadFile = (data) => http.post('/PolicySupport/DownloadFile', data)
+  static downloadFile = (data) => http.postParams('/PolicySupport/DownloadFile', data)
 
   // 重命名
   static reName = (data) => http.post('/PolicySupport/ReName', data)
