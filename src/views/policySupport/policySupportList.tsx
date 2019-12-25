@@ -337,7 +337,8 @@ class policySupportList extends Component<any,any> {
         </span>
       )
     }
-    const columns = thead.concat(fileName, action)
+    const columns = thead.concat(action)
+    columns.splice(0, 0, fileName)
     // const columns = [...fileName, ...thead, ...action]
     const { formData, endOpen, selectedRowKeys } = this.state  
 
