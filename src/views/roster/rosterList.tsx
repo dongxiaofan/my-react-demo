@@ -46,7 +46,7 @@ class RosterList extends Component<any,any> {
 
   // 查询
   async searchFn () {
-    let tableComone = this.state.tableComone
+    let {tableComone} = this.state
     tableComone.pageIndex = 1
     await this.setState({
       tableComone
@@ -56,7 +56,7 @@ class RosterList extends Component<any,any> {
 
   // 点击分页
   async handleTableChange (page:any) {
-    let tableComone = this.state
+    let {tableComone} = this.state
     tableComone.pageIndex = page.current
     await this.setState({
       tableComone
@@ -66,7 +66,7 @@ class RosterList extends Component<any,any> {
   
   // 获取列表数据
   async query () {
-    let tableComone = this.state.tableComone
+    let {tableComone, tableData} = this.state
     var params = {
       isDue: false,
       isRetire: false,
@@ -84,8 +84,9 @@ class RosterList extends Component<any,any> {
     let res = await EmployeesApi.getEmployeeListNew(params)
     if (res.code === 200 && res.success) {
       tableComone.totalRows = res.totalRows
+      tableData = res.data
       this.setState({
-        tableData: res.data,
+        tableData,
         tableComone
       })
     }
@@ -93,7 +94,7 @@ class RosterList extends Component<any,any> {
 
   // 下拉框改变
   async handleSelectChange (value:any, key:any) {
-    let formData = this.state.formData
+    let {formData} = this.state
     formData[key] = value
     await this.setState({
       formData
@@ -103,7 +104,7 @@ class RosterList extends Component<any,any> {
   // 输入框数据双向绑定
   async handleInputChange (key, e) {
     console.log('💀 key: ', key, ', 💀 e: ', e)
-    let formData = this.state.formData
+    let {formData} = this.state
     formData[key] = e.target.value
     await this.setState({
       formData
@@ -161,6 +162,8 @@ class RosterList extends Component<any,any> {
       )
     }
     const columns = thead.concat(action)
+    let {formData, tableData, tableComone} = this.state
+
     return (
       <div className="cont-wrap">
         <div className="search-form clearfix mb-20">
@@ -183,7 +186,7 @@ class RosterList extends Component<any,any> {
                   return (
                     <Col span={8} key={item.model}>
                       <Form.Item label={item.label}>
-                        <Input allowClear placeholder={item.placeholder} name={item.model} value={this.state.formData[item.model]} onChange={this.handleInputChange.bind(this, item.model)}/>
+                        <Input allowClear placeholder={item.placeholder} name={item.model} value={formData[item.model]} onChange={this.handleInputChange.bind(this, item.model)}/>
                       </Form.Item>
                     </Col>
                   )
@@ -197,13 +200,13 @@ class RosterList extends Component<any,any> {
 
         <div className="bg-white pl-20 pr-20">
           <div className="table-operations">
-            <div className="table-operations-left-test">合计<span className="text-danger">{this.state.tableComone.totalRows}</span>条</div>
+            <div className="table-operations-left-test">合计<span className="text-danger">{tableComone.totalRows}</span>条</div>
           </div>
           <Table
             columns={columns}
-            dataSource={this.state.tableData}
+            dataSource={tableData}
             rowKey={record => record.id}
-            pagination={{total: this.state.tableComone.totalRows}}
+            pagination={{total: tableComone.totalRows}}
             onChange={(e:any) => this.handleTableChange(e)}
           >
           </Table>
