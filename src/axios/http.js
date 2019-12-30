@@ -62,6 +62,9 @@ const http = {
   get: function(url, data) {
     return getPromiseOfParam(url, data, 'GET')
   },
+  getData: function(url, data) {
+    return getPromiseOfData(url, data, 'GET')
+  },
   post: function(url, data) {
     return getPromiseOfData(url, data, 'POST')
   },

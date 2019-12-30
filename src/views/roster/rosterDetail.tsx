@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import { Form, Row, Col, Select, Cascader, DatePicker, Input, Table, Button, message } from 'antd'
+import SysAreaApi from '@/api/SysArea.api'
 import EmployeesApi from '@/api/Employees.api'
 import BreadcrumbCustom from '@/components/layout/BreadcrumbCustom'
 import { Link, withRouter} from "react-router-dom"
@@ -109,15 +110,14 @@ const arrListDown:any = {
   EmploymentForm: []
 }
 
-let areaTree:any = []
-
 let urlParams = {}
 
 class RosterDetail extends Component<any,any> {
   state:any = {
     basicInfo: {},
     formBasicData: {},
-    canEdit: false
+    canEdit: false,
+    areaTree: []
   }
 
   constructor(props:any) {
@@ -125,17 +125,10 @@ class RosterDetail extends Component<any,any> {
 
     // 获取URL参数
     urlParams = tool.queryUrlParams(props.location.search)
-    
-    // 获取全国省份
-    let provinceList:any = localStorage.getItem('provinceList')
-    arrListDown.cityId = JSON.parse(provinceList) // 全国省份列表
-    arrListDown.cityId.map(item => {
-      item.value = item.id
-      item.label = item.name
-    })
-    console.log('🧞‍ arrListDown： ', arrListDown)
+
+    // 获取省市区级联选择内容
     let tempAreaTree:any = localStorage.getItem('areaTree')
-    areaTree = JSON.parse(tempAreaTree)
+    this.state.areaTree = JSON.parse(tempAreaTree)
 
     this.state.canEdit = urlParams['isEdit'] == 'true' ? true : false
 
@@ -287,7 +280,7 @@ class RosterDetail extends Component<any,any> {
                   return (
                     <Col span={6} key={item.model}>
                       <Form.Item label={item.label}>
-                        <Cascader options={areaTree} placeholder={this.state.canEdit ? item.placeholder : '未选择'} value={this.state.formBasicData[item.model]} onChange={(value, selectedOptions) => this.handleCascaderChange(value, selectedOptions, item.model)} disabled={!this.state.canEdit}>
+                        <Cascader options={this.state.areaTree} placeholder={this.state.canEdit ? item.placeholder : '未选择'} value={this.state.formBasicData[item.model]} onChange={(value, selectedOptions) => this.handleCascaderChange(value, selectedOptions, item.model)} disabled={!this.state.canEdit}>
                         </Cascader>
                       </Form.Item>
                     </Col>

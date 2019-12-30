@@ -6,11 +6,13 @@ import NotFound from './aside/NotFound';
 import Roster from './roster/rosterList';
 import RosterDetail from './roster/rosterDetail';
 import PolicySupportList from './policySupport/policySupportList';
+import WorkPlan from './dailyManage/workPlan/workPlan';
 
 export default {
     Home,    
     NotFound,
     Roster,
     RosterDetail,
-    PolicySupportList
+    PolicySupportList,
+    WorkPlan
 } as any;

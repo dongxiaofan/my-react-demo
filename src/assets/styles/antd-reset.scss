@@ -8,6 +8,26 @@
 }
 
 .search-form{
+  &.search-form-100{
+    .ant-form{
+      .ant-col{
+        .ant-form-item{
+          margin-bottom: 10px;
+        }
+        .ant-form-item-control-wrapper{
+          .ant-form-item-control{
+            .ant-form-item-children{
+              width: 100%;
+              display: inline-block;
+              .ant-calendar-picker{
+                width: 100%;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
   .ant-form{
     .ant-col{
       .ant-form-item{
@@ -23,6 +43,17 @@
     .ant-col{
       .ant-form-item{
         .ant-form-item-label{
+        }
+        .ant-form-item-control-wrapper{
+          .ant-form-item-control{
+            .ant-form-item-children{
+              width: 100%;
+              display: inline-block;
+              .ant-calendar-picker{
+                width: 100%;
+              }
+            }
+          }
         }
       }
     }
