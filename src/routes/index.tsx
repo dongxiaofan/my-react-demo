@@ -45,7 +45,7 @@ export default class CRouter extends Component<CRouterProps> {
                 <Route
                   key={r.route || r.key}
                   exact
-                  path={r.route || r.key}
+                  path={r.route || r.link}
                   render={props => {
                     const reg = /\?\S*/g;
                     // 匹配?及其以后字符串

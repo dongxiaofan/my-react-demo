@@ -8,8 +8,30 @@ import { MenuProps } from 'antd/lib/menu';
 const renderMenuItem = (
   item: IFMenu // item.route 菜单单独跳转的路由
 ) => (
+    item.subs ? 
+    <Menu.SubMenu
+      key={item.key}
+      title={
+        <span>
+          <span className="nav-text">{item.title}</span>
+        </span>
+      }
+    >
+      {item.subs.map(citem => {
+        return (
+          // <p>{citem.title}</p>
+          <Menu.Item key={citem.key}>
+            <Link to={(citem.route || citem.link) + (citem.query || '')}>
+              <span className="nav-text">{citem.title}</span>
+            </Link>
+          </Menu.Item>
+        )
+      })}
+    </Menu.SubMenu>
+    // renderSubMenu(item)
+    : 
     <Menu.Item key={item.key} className={item.hidden == true?"display-none":''}>
-      <Link to={(item.route || item.key) + (item.query || '')}>
+      <Link to={(item.route || item.link) + (item.query || '')}>
         {item.icon && <Icon type={item.icon} />}
         <span className="nav-text">{item.title}</span>
       </Link>

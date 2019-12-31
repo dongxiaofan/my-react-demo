@@ -114,9 +114,9 @@ class RosterList extends Component<any,any> {
   // 去往详情
   goDetail (row, isEdit):any {
     if (isEdit) {
-      this.props.history.push('/app/roster/rosterDetail?id=' + row.id + '&isEdit=true')
+      this.props.history.push('/app/customer/rosterDetail?id=' + row.id + '&isEdit=true')
     } else {      
-      this.props.history.push('/app/roster/rosterDetail?id=' + row.id)
+      this.props.history.push('/app/customer/rosterDetail?id=' + row.id)
     }
   }
 

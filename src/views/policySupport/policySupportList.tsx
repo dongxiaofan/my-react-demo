@@ -24,7 +24,7 @@ const formItem = [
   { type: 'select', label: '文件类型', placeholder: '请选择文件类型', model: 'fileType', options: 'policysupport' },
 ]
 
-class policySupportList extends Component<any,any> {
+class PolicySupportList extends Component<any,any> {
   state:any = {
     tableData: [],
     tableComone: {        
@@ -340,7 +340,7 @@ class policySupportList extends Component<any,any> {
     const columns = thead.concat(action)
     columns.splice(0, 0, fileName)
     // const columns = [...fileName, ...thead, ...action]
-    const { formData, endOpen, selectedRowKeys } = this.state  
+    let {formData, endOpen, currentFolder, selectedRowKeys, tableData, tableComone, PSID} = this.state
 
     const rowSelection = {
       selectedRowKeys,
@@ -400,7 +400,7 @@ class policySupportList extends Component<any,any> {
                   return (
                     <Col span={8} key={item.model}>
                       <Form.Item label={item.label}>
-                        <Input allowClear placeholder={item.placeholder} name={item.model} value={this.state.formData[item.model]} onChange={this.handleInputChange.bind(this, item.model)}/>
+                        <Input allowClear placeholder={item.placeholder} name={item.model} value={formData[item.model]} onChange={this.handleInputChange.bind(this, item.model)}/>
                       </Form.Item>
                     </Col>
                   )
@@ -421,9 +421,9 @@ class policySupportList extends Component<any,any> {
                 <Icon type="right" className="font-12 pl-4 pr-4"/>
               </div>
               {
-                this.state.currentFolder.map((folder,folderIndex) => {
+                currentFolder.map((folder,folderIndex) => {
                   return (
-                    folderIndex !== this.state.currentFolder.length - 1 ?
+                    folderIndex !== currentFolder.length - 1 ?
                     <div className="pull-left" key={folder['fileName']} onClick={() => this.handleChangeFolder(folderIndex, folder.parentId, folder.fileName)}>
                       <a>{folder.fileName}</a>
                       <Icon type="right" className="font-12 pl-4 pr-4"/>
@@ -438,7 +438,7 @@ class policySupportList extends Component<any,any> {
             </div>
             <div className="pull-right pt-18">
               <Button type="primary" className="mr-10" onClick={() => this.handleShowImportModal()}>文件上传</Button>
-              {/* <Button type="danger" ghost className="mr-10" disabled={this.state.selectedRowKeys.length <= 0}>删除</Button> */}
+              {/* <Button type="danger" ghost className="mr-10" disabled={selectedRowKeys.length <= 0}>删除</Button> */}
               <Popconfirm
                 title="是否确定删除？"
                 onConfirm={(e)=>this.isSureDelete()}
@@ -446,11 +446,11 @@ class policySupportList extends Component<any,any> {
                 cancelText="取消"
                 className="mr-10"
               >
-                <Button type="danger" ghost disabled={this.state.selectedRowKeys.length <= 0}>删除</Button>
+                <Button type="danger" ghost disabled={selectedRowKeys.length <= 0}>删除</Button>
               </Popconfirm>
               <Button type="primary" className="mr-10" onClick={() => this.handleShowCreateFileModal()}>新建文件夹</Button>
-              <Button type="primary" ghost className="mr-10" disabled={this.state.selectedRowKeys.length <= 0} onClick={() => this.handleShowOrganizationUnitTreeModal()}>文件共享</Button>
-              {/* <Button className="" disabled={this.state.selectedRowKeys.length <= 0}>取消共享</Button> */}
+              <Button type="primary" ghost className="mr-10" disabled={selectedRowKeys.length <= 0} onClick={() => this.handleShowOrganizationUnitTreeModal()}>文件共享</Button>
+              {/* <Button className="" disabled={selectedRowKeys.length <= 0}>取消共享</Button> */}
               <Popconfirm
                 title="是否取消共享？"
                 onConfirm={(e)=>this.isSureUnFileShare()}
@@ -458,15 +458,15 @@ class policySupportList extends Component<any,any> {
                 cancelText="取消"
                 className="mr-10"
               >
-                <Button type="danger" ghost disabled={this.state.selectedRowKeys.length <= 0}>取消共享</Button>
+                <Button type="danger" ghost disabled={selectedRowKeys.length <= 0}>取消共享</Button>
               </Popconfirm>
             </div>
           </div>
           <Table
             columns={columns}
-            dataSource={this.state.tableData}
+            dataSource={tableData}
             rowKey={record => record.id}
-            pagination={{total: this.state.tableComone.totalRows}}
+            pagination={{total: tableComone.totalRows}}
             onChange={(e:any) => this.handleTableChange(e)}
             rowSelection={rowSelection}
           >
@@ -475,14 +475,14 @@ class policySupportList extends Component<any,any> {
       
         {/* 弹窗 */}
         <ReNameModal onRef={(ref) => this.onRef(ref, 'reNameModal')} query={this.searchFn} />
-        <ImportModal onRef={(ref) => this.onRef(ref, 'importModal')} query={this.searchFn} PSID={this.state.PSID}/>
-        <OrganizationUnitTreeModal onRef={(ref) => this.onRef(ref, 'organizationUnitTreeModal')} query={this.searchFn} ids={this.state.selectedRowKeys}/>
-        <CreateFileModal onRef={(ref) => this.onRef(ref, 'createFileModal')} query={this.searchFn} PSID={this.state.PSID}/>
+        <ImportModal onRef={(ref) => this.onRef(ref, 'importModal')} query={this.searchFn} PSID={PSID}/>
+        <OrganizationUnitTreeModal onRef={(ref) => this.onRef(ref, 'organizationUnitTreeModal')} query={this.searchFn} ids={selectedRowKeys}/>
+        <CreateFileModal onRef={(ref) => this.onRef(ref, 'createFileModal')} query={this.searchFn} PSID={PSID}/>
       </div>
     )
   }
 }
 
-// export default policySupportList
-export default withRouter(policySupportList)
+// export default PolicySupportList
+export default withRouter(PolicySupportList)
 

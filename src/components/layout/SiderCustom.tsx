@@ -15,7 +15,7 @@ type SiderCustomProps = RouteComponentProps<any> & {
 };
 type SiderCustomState = {
   collapsed?: boolean | undefined;
-  openKey: string;
+  openKey: any;
   firstHide: boolean | undefined;
   selectedKey: string;
   mode: string;
@@ -27,7 +27,7 @@ class SiderCustom extends Component<SiderCustomProps, SiderCustomState> {
     super(props);
     this.state = {
       mode: 'inline',
-      openKey: '',
+      openKey: [],
       selectedKey: '',
       firstHide: true, // 点击收缩菜单，第一次隐藏展开子菜单，openMenu时恢复
     };
@@ -37,32 +37,33 @@ class SiderCustom extends Component<SiderCustomProps, SiderCustomState> {
     if (this.props.collapsed !== this.state.collapsed) {
       const { collapsed, location } = this.props;
       const { pathname } = location;
-      this.setState({
-        openKey: pathname.substr(0, pathname.lastIndexOf('/')),
-        selectedKey: pathname,
-        collapsed,
-        mode: collapsed ? 'vertical' : 'inline',
-        firstHide: collapsed,
-      });
+      // this.setState({
+      //   openKey: pathname.substr(0, pathname.lastIndexOf('/')),
+      //   selectedKey: pathname,
+      //   collapsed,
+      //   mode: collapsed ? 'vertical' : 'inline',
+      //   firstHide: collapsed,
+      // });
     }
   }
 
   menuClick = (e: any) => {
     this.setState({
-      selectedKey: e.key,
+      selectedKey: e.link,
     });
     const { popoverHide } = this.props; // 响应式布局控制小屏幕点击菜单时隐藏菜单操作
     popoverHide && popoverHide();
   };
   openMenu = (v: string[]) => {
+    console.log('🧞‍ v[v.length - 1]: ', v[v.length - 1], ', 🥁 v: ', v)
     this.setState({
-      openKey: v[v.length - 1],
+      openKey: v,
       firstHide: false,
     });
   };
   render() {
     const { selectedKey, openKey, firstHide, collapsed } = this.state;
-    const path = this.props.location.pathname;
+    const path = this.props.location.pathname.substr(this.props.location.pathname.lastIndexOf('/') + 1, this.props.location.pathname.length);
     return (
       <Sider
         trigger={null}
@@ -71,15 +72,15 @@ class SiderCustom extends Component<SiderCustomProps, SiderCustomState> {
         style={{ overflowY: 'auto' }}
       >
         <div className="logo" />
-        {/* <p className="text-danger">⭐ {[selectedKey]}</p>
-        <p className="text-danger">⭐ {[path]}</p> */}
+        {/* <p className="text-danger">⭐ {[selectedKey]}</p> */}
+        {/* <p className="text-danger">⭐ {[path]}</p> */}
         <SiderMenu
           menus={routes.menus}
           onClick={this.menuClick}
           mode="inline"
           // selectedKeys={[selectedKey]}
           selectedKeys={[path]}
-          openKeys={firstHide ? [] : [openKey]}
+          openKeys={firstHide ? [] : openKey}
           onOpenChange={this.openMenu}
         />
         <style>

@@ -96,7 +96,7 @@ class Login extends React.Component<any, any> {
                 {getFieldDecorator(`${item.model}`, {
                   rules: rules[`${item.model}`]
                 })(
-                  <Input prefix={<Icon type={item.icon}/>} placeholder={item.placeholder} />
+                  <Input prefix={<Icon type={item.icon}/>} placeholder={item.placeholder} type={item.model === 'password' ? 'password' : 'text'} />
                 )}
               </Form.Item>
             )}

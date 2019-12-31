@@ -27,7 +27,7 @@ const toolbarOptions = [
   [{ 'color': [] }, { 'background': [] }]
 ]
 
-class workPlan extends Component<any,any> {
+class WorkPlan extends Component<any,any> {
   constructor(props:any) {
     super(props)
 
@@ -528,5 +528,5 @@ class workPlan extends Component<any,any> {
   }
 }
 
-export default workPlan
+export default WorkPlan
 

@@ -1,5 +1,6 @@
 export interface IFMenuBase {
   key: string;
+  link: string;
   title: string;
   icon?: string;
   hidden?: boolean;
@@ -7,6 +8,7 @@ export interface IFMenuBase {
   query?: string;
   auth?: string;
   route?: string;
+  subs?: any;
   /** 是否登录校验，true不进行校验（访客） */
   login?: boolean;
 }
@@ -22,30 +24,42 @@ const menus: {
 } = {
   menus: [
     // 菜单相关路由
-    { key: '/app/home', title: '首页', icon: 'home', component: 'Home' },
+    { key: 'home', link: '/app/home', title: '首页', icon: 'home', component: 'Home' },
     {
-      key: '/app/dailyManage',
+      key: 'dailyManage',
+      link: '/app/dailyManage',
       title: '日常管理',
       icon: 'profile',
       subs: [
-        { key: '/app/dailyManage/workPlan', title: '工作计划', component: 'WorkPlan' }
+        { key: 'workPlan', link: '/app/dailyManage/workPlan', title: '工作计划', component: 'WorkPlan' }
       ]
     },
     {
-      key: '/app/roster',
-      title: '员工管理',
+      key: 'customer',
+      link: '/app/customer',
+      title: '客户管理',
       icon: 'profile',
       subs: [
-        { key: '/app/roster/rosterList', title: '花名册', component: 'Roster' },
-        { key: '/app/roster/rosterDetail', title: '员工详情', component: 'RosterDetail', hidden: true }
+        { key: 'rosterList', link: '/app/customer/rosterList', title: '花名册', component: 'Roster' },
+        { key: 'rosterDetail', link: '/app/customer/rosterDetail', title: '员工详情', component: 'RosterDetail', hidden: true },
+        { key: 'employeeAccount', link: '/app/customer/account/employeeAccount', title: '员工账号', component: 'EmployeeAccount', hidden: true },
+        {
+          key: 'account',
+          link: '/app/customer/account',
+          title: '账号管理',
+          subs: [
+            { key: 'employeeAccount', link: '/app/customer/account/employeeAccount', title: '员工账号', component: 'EmployeeAccount' }
+          ]
+        }
       ]
     },
     {
-      key: '/app/policySupport',
+      key: 'policySupport',
+      link: '/app/policySupport',
       title: '政策文件',
       icon: 'file-word',
       subs: [
-        { key: '/app/roster/policySupportList', title: '政策文件列表', component: 'PolicySupportList' }
+        { key: 'policySupportList', link: '/app/policySupport/policySupportList', title: '政策文件列表', component: 'PolicySupportList' }
       ]
     }
   ],

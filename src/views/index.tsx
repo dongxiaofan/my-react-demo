@@ -3,10 +3,11 @@
  */
 import Home from './home/home';
 import NotFound from './aside/NotFound';
-import Roster from './roster/rosterList';
-import RosterDetail from './roster/rosterDetail';
+import Roster from './customer/roster/rosterList';
+import RosterDetail from './customer/roster/rosterDetail';
 import PolicySupportList from './policySupport/policySupportList';
 import WorkPlan from './dailyManage/workPlan/workPlan';
+import EmployeeAccount from './customer/account/employeeAccount';
 
 export default {
     Home,    
@@ -14,5 +15,6 @@ export default {
     Roster,
     RosterDetail,
     PolicySupportList,
-    WorkPlan
+    WorkPlan,
+    EmployeeAccount
 } as any;

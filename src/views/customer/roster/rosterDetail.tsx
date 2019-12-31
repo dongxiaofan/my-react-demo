@@ -240,7 +240,7 @@ class RosterDetail extends Component<any,any> {
     if (res.code === 200 && res.success) {
       message.success(res.message)
       setTimeout(() => {
-        that.props.history.push('/app/roster/rosterList')
+        that.props.history.push('/app/customer/rosterList')
       }, 3000)
     } else {
       message.error(res.message)
@@ -248,10 +248,11 @@ class RosterDetail extends Component<any,any> {
   }
 
   goBack () {
-    this.props.history.push('/app/roster/rosterList')
+    this.props.history.push('/app/customer/rosterList')
   }
 
   render () {
+    let {canEdit, formBasicData, areaTree} = this.state
     const formItemLayout = {
       labelCol: { span: 8 },
       wrapperCol: { span: 16 },
@@ -267,7 +268,7 @@ class RosterDetail extends Component<any,any> {
                 return (
                   <Col span={6} key={item.model}>
                     <Form.Item label={item.label}>
-                      <Select allowClear placeholder={this.state.canEdit ? item.placeholder : '未选择'} value={this.state.formBasicData[item.model]} onChange={(e:any) => this.handleSelectChange(e, item.model)} disabled={!this.state.canEdit}>
+                      <Select allowClear placeholder={canEdit ? item.placeholder : '未选择'} value={formBasicData[item.model]} onChange={(e:any) => this.handleSelectChange(e, item.model)} disabled={!canEdit}>
                         {arrListDown[`${item.options}`].map((ops:any) => {
                           return (
                             <Option key={ops.value} value={ops.value}>{ops.label}</Option>
@@ -280,7 +281,7 @@ class RosterDetail extends Component<any,any> {
                   return (
                     <Col span={6} key={item.model}>
                       <Form.Item label={item.label}>
-                        <Cascader options={this.state.areaTree} placeholder={this.state.canEdit ? item.placeholder : '未选择'} value={this.state.formBasicData[item.model]} onChange={(value, selectedOptions) => this.handleCascaderChange(value, selectedOptions, item.model)} disabled={!this.state.canEdit}>
+                        <Cascader options={areaTree} placeholder={canEdit ? item.placeholder : '未选择'} value={formBasicData[item.model]} onChange={(value, selectedOptions) => this.handleCascaderChange(value, selectedOptions, item.model)} disabled={!canEdit}>
                         </Cascader>
                       </Form.Item>
                     </Col>
@@ -289,7 +290,7 @@ class RosterDetail extends Component<any,any> {
                   return (
                     <Col span={6} key={item.model}>
                       <Form.Item label={item.label}>
-                        <DatePicker format="YYYY-MM-DD" placeholder={this.state.canEdit ? item.placeholder : '未选择'} value={moment(this.state.formBasicData[item.model])} onChange={(date, dateString) => this.handleDatePickerChange(date, dateString, item.model)} disabled={!this.state.canEdit} />
+                        <DatePicker format="YYYY-MM-DD" placeholder={canEdit ? item.placeholder : '未选择'} value={moment(formBasicData[item.model])} onChange={(date, dateString) => this.handleDatePickerChange(date, dateString, item.model)} disabled={!canEdit} />
                       </Form.Item>
                     </Col>
                   )
@@ -297,7 +298,7 @@ class RosterDetail extends Component<any,any> {
                   return (
                     <Col span={6} key={item.model}>
                       <Form.Item label={item.label}>
-                        <Input allowClear placeholder={this.state.canEdit ? item.placeholder : '未填写'} name={item.model} value={this.state.formBasicData[item.model]} onChange={this.handleInputChange.bind(this, item.model)} disabled={!this.state.canEdit} />
+                        <Input allowClear placeholder={canEdit ? item.placeholder : '未填写'} name={item.model} value={formBasicData[item.model]} onChange={this.handleInputChange.bind(this, item.model)} disabled={!canEdit} />
                       </Form.Item>
                     </Col>
                   )
@@ -308,13 +309,13 @@ class RosterDetail extends Component<any,any> {
         
         <div className="text-center pt-20">
           {
-            this.state.canEdit ?
+            canEdit ?
             <span>
-              <Button type="primary" onClick={e => this.handleSubmit()}>提交</Button>
-              <Button type="default" onClick={e => this.goBack()} className="ml-20">返回</Button>
+              <Button type="primary" onClick={() => this.handleSubmit()}>提交</Button>
+              <Button type="default" onClick={() => this.goBack()} className="ml-20">返回</Button>
             </span>
             :
-            <Button type="default" onClick={e => this.goBack()}>返回</Button>
+            <Button type="default" onClick={() => this.goBack()}>返回</Button>
             
           }
         </div>
