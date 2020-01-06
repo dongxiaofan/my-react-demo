@@ -61,9 +61,12 @@ const menus: {
       subs: [
         { key: 'policySupportList', link: '/app/policySupport/policySupportList', title: '政策文件列表', component: 'PolicySupportList' }
       ]
-    }
+    },
+    // { key: 'about', link: '/app/about', title: '关于我', icon: 'about', component: 'About' }
   ],
-  others: [], // 非菜单相关路由
+  others: [
+    { key: 'about', link: '/app/about', title: '关于我', icon: 'about', component: 'About' }
+  ], // 非菜单相关路由
 };
 
 export default menus;

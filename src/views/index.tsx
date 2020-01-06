@@ -3,6 +3,7 @@
  */
 import Home from './home/home';
 import NotFound from './aside/NotFound';
+import About from './aside/about';
 import Roster from './customer/roster/rosterList';
 import RosterDetail from './customer/roster/rosterDetail';
 import PolicySupportList from './policySupport/policySupportList';
@@ -12,6 +13,7 @@ import EmployeeAccount from './customer/account/employeeAccount';
 export default {
     Home,    
     NotFound,
+    About,
     Roster,
     RosterDetail,
     PolicySupportList,
