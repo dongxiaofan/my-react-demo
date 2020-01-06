@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "./static/css/main.e2b8553d.chunk.css",
+    "main.js": "./static/js/main.d0a2a473.chunk.js",
+    "main.js.map": "./static/js/main.d0a2a473.chunk.js.map",
+    "runtime-main.js": "./static/js/runtime-main.d611ebf2.js",
+    "runtime-main.js.map": "./static/js/runtime-main.d611ebf2.js.map",
+    "static/css/2.498266b3.chunk.css": "./static/css/2.498266b3.chunk.css",
+    "static/js/2.aed95407.chunk.js": "./static/js/2.aed95407.chunk.js",
+    "static/js/2.aed95407.chunk.js.map": "./static/js/2.aed95407.chunk.js.map",
+    "index.html": "./index.html",
+    "precache-manifest.4d8972b3830cec6bfd25578ef2c84b1b.js": "./precache-manifest.4d8972b3830cec6bfd25578ef2c84b1b.js",
+    "service-worker.js": "./service-worker.js",
+    "static/css/2.498266b3.chunk.css.map": "./static/css/2.498266b3.chunk.css.map",
+    "static/css/main.e2b8553d.chunk.css.map": "./static/css/main.e2b8553d.chunk.css.map",
+    "static/media/main.scss": "./static/media/login-bg.0899ffa6.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.d611ebf2.js",
+    "static/css/2.498266b3.chunk.css",
+    "static/js/2.aed95407.chunk.js",
+    "static/css/main.e2b8553d.chunk.css",
+    "static/js/main.d0a2a473.chunk.js"
+  ]
+}
