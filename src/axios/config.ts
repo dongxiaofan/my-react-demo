@@ -6,5 +6,6 @@ var env = 'develop' // 本地测试时使用
 const serveUrl = env === 'develop' ? 'http://10.10.10.117:81/api' : (env === 'build' ? 'http://www.vxhro.com:81' : 'https://www.vxhro.com')
 
 export default {
+  env,
   serveUrl
 }

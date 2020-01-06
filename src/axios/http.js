@@ -1,5 +1,8 @@
 import axios from 'axios'
 import { message } from 'antd'
+import config from './config'
+
+const serveUrl = config.env === 'develop' ? '/api' : (config.env === 'build' ? 'http://www.vxhro.com:81/api' : 'https://www.vxhro.com/api')
 
 function getHeader() {
   if (JSON.parse(localStorage.getItem('loginInfo'))) {
@@ -17,7 +20,7 @@ function getHeader() {
 function getPromiseOfData(url, data, method) {
   return new Promise((resolve, reject) => {
     axios.request({
-      url: '/api' + `${url}`,
+      url: serveUrl + `${url}`,
       header: getHeader(),
       method: method,
       data: data
@@ -39,7 +42,7 @@ function getPromiseOfData(url, data, method) {
 function getPromiseOfParam(url, data, method) {
   return new Promise((resolve, reject) => {
     axios.request({
-      url: '/api' + `${url}`,
+      url: serveUrl + `${url}`,
       header: getHeader(),
       method: method,
       params: data

@@ -3,8 +3,6 @@
   "version": "3.0.0",
   "private": true,
   "homepage": "https://dongxiaofan.github.io/my-react-demo",
-  "predeploy": "npm run build",
-  "deploy": "gh-pages -d build",
   "dependencies": {
     "@babel/core": "7.6.0",
     "@svgr/webpack": "4.3.2",
