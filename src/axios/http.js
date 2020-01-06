@@ -2,8 +2,6 @@ import axios from 'axios'
 import { message } from 'antd'
 import config from './config'
 
-console.log('xxxxxxxxxxxxxxxxxxxxxx config.env: ', config.env)
-
 const serveUrl = config.env === 'develop' ? '/api' : (config.env === 'build' ? 'http://www.vxhro.com:81/api' : 'https://www.vxhro.com/api')
 
 function getHeader() {
