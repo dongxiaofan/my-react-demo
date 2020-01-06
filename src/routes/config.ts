@@ -29,7 +29,7 @@ const menus: {
       key: 'dailyManage',
       link: '/app/dailyManage',
       title: '日常管理',
-      icon: 'profile',
+      icon: 'contacts',
       subs: [
         { key: 'workPlan', link: '/app/dailyManage/workPlan', title: '工作计划', component: 'WorkPlan' }
       ]
@@ -42,15 +42,24 @@ const menus: {
       subs: [
         { key: 'rosterList', link: '/app/customer/rosterList', title: '花名册', component: 'Roster' },
         { key: 'rosterDetail', link: '/app/customer/rosterDetail', title: '员工详情', component: 'RosterDetail', hidden: true },
-        { key: 'employeeAccount', link: '/app/customer/account/employeeAccount', title: '员工账号', component: 'EmployeeAccount', hidden: true },
-        {
-          key: 'account',
-          link: '/app/customer/account',
-          title: '账号管理',
-          subs: [
-            { key: 'employeeAccount', link: '/app/customer/account/employeeAccount', title: '员工账号', component: 'EmployeeAccount' }
-          ]
-        }
+        // { key: 'employeeAccount', link: '/app/customer/account/employeeAccount', title: '员工账号', component: 'EmployeeAccount', hidden: true },
+        // {
+        //   key: 'account',
+        //   link: '/app/customer/account',
+        //   title: '账号管理',
+        //   subs: [
+        //     { key: 'employeeAccount', link: '/app/customer/account/employeeAccount', title: '员工账号', component: 'EmployeeAccount' }
+        //   ]
+        // }
+      ]
+    },
+    {
+      key: 'account',
+      link: '/app/account',
+      title: '账号管理',
+      icon: 'appstore',
+      subs: [
+        { key: 'employeeAccount', link: '/app/account/employeeAccount', title: '员工账号', component: 'EmployeeAccount' }
       ]
     },
     {
