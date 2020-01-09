@@ -78,7 +78,7 @@ class PolicySupportList extends Component<any,any> {
 
   // 点击分页
   async handleTableChange (page:any) {
-    let tableComone = this.state
+    let {tableComone} = this.state
     tableComone.pageIndex = page.current
     await this.setState({
       tableComone
@@ -414,7 +414,7 @@ class PolicySupportList extends Component<any,any> {
 
         <div className="bg-white pl-20 pr-20">
           <div className="table-operations">
-            {/* <div className="table-operations-left-test pull-left">合计<span className="text-danger">{this.state.tableComone.totalRows}</span>条</div> */}
+            {/* <div className="table-operations-left-test pull-left">合计<span className="text-danger pl-4 pr-4">{this.state.tableComone.totalRows}</span>条</div> */}
             <div className="table-operations-left-test pull-left">
               <div className="pull-left">
                 <a onClick={() => this.backInitTable()}>根目录</a>

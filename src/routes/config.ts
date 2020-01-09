@@ -59,7 +59,18 @@ const menus: {
       title: '账号管理',
       icon: 'appstore',
       subs: [
-        { key: 'employeeAccount', link: '/app/account/employeeAccount', title: '员工账号', component: 'EmployeeAccount' }
+        { key: 'employeeAccount', link: '/app/account/employeeAccount', title: '员工账号', component: 'EmployeeAccount' },
+        { key: 'customerAccount', link: '/app/account/customerAccount', title: '客户账号', component: 'CustomerAccount' },
+        { key: 'supplierAccount', link: '/app/account/supplierAccount', title: '平台账号', component: 'SupplierAccount' }
+      ]
+    },
+    {
+      key: 'vOddJobs',
+      link: '/app/vOddJobs',
+      title: 'V零工',
+      icon: 'unordered-list',
+      subs: [
+        { key: 'sendOrder', link: '/app/vOddJobs/sendOrder', title: '派单管理', component: 'SendOrder' }
       ]
     },
     {
@@ -72,6 +83,17 @@ const menus: {
       ]
     },
     // { key: 'about', link: '/app/about', title: '关于我', icon: 'about', component: 'About' }
+    {
+      key: 'aside',
+      link: '/app/aside',
+      title: '其他/范例',
+      icon: 'appstore',
+      subs: [
+        { key: 'todo', link: '/app/todo', title: 'todo', icon: 'home', component: 'Todo' },
+        { key: 'gaojie1', link: '/app/gaojie1', title: '高阶组件1', icon: 'home', component: 'Gaojie1', hidden: true },
+        { key: 'gaojie2', link: '/app/gaojie2', title: '高阶组件2', icon: 'home', component: 'Gaojie2', hidden: true }
+      ]
+    },
   ],
   others: [
     { key: 'about', link: '/app/about', title: '关于我', icon: 'about', component: 'About' }

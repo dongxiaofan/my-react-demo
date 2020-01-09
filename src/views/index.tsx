@@ -8,7 +8,13 @@ import Roster from './customer/roster/rosterList';
 import RosterDetail from './customer/roster/rosterDetail';
 import PolicySupportList from './policySupport/policySupportList';
 import WorkPlan from './dailyManage/workPlan/workPlan';
-import EmployeeAccount from './customer/account/employeeAccount';
+import EmployeeAccount from './account/employeeAccount';
+import CustomerAccount from './account/customerAccount';
+import SupplierAccount from './account/supplierAccount';
+import SendOrder from './vOddJobs/sendOrder';
+import Todo from './example/todo';
+import Gaojie1 from './example/gaojie1';
+import Gaojie2 from './example/gaojie2';
 
 export default {
     Home,    
@@ -18,5 +24,11 @@ export default {
     RosterDetail,
     PolicySupportList,
     WorkPlan,
-    EmployeeAccount
+    EmployeeAccount,
+    CustomerAccount,
+    SupplierAccount,
+    SendOrder,
+    Todo,
+    Gaojie1,
+    Gaojie2
 } as any;
