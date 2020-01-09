@@ -175,12 +175,13 @@ $warning: #ffb31a;
         position: relative;
         &:after{
           content: "";
-          width: 12px;
-          height: 1px;
+          width: 1px;
+          height: 18px;
           display: inline-block;
           animation: hasguangbiaobox .5s infinite;
           position: absolute;
-          bottom: 0;
+          top: 50%;
+          margin-top: -9px;
           right: -20px;
         }
       }
