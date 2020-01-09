@@ -12,7 +12,7 @@ class TypingText extends React.Component {
     const typing = new Typing({
       source: this.source,
       output: this.output,
-      delay: 40
+      delay: 100
     })
     typing.start()
   }

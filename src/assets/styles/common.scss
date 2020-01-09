@@ -19,6 +19,9 @@ $warning: #ffb31a;
     font-size: #{$i}px !important;
   }
 }
+.font-weight{
+  font-weight: bold;
+}
 
 .pull-left{
   float: left;
@@ -148,5 +151,48 @@ $warning: #ffb31a;
 
 #root{
   height: 100%;
+}
+
+.guangbiao{
+  width: 12px;
+  height: 1px;
+  display: inline-block;
+  animation: myguangbiao .5s infinite;
+}
+@keyframes myguangbiao {
+  from {
+    background: rgba(255, 255, 255, .6);
+  }
+  to {
+    background: rgba(255, 255, 255, 0);
+  }
+}
+
+.has-guangbiao-box{
+  p{
+    &:last-child{
+      span{
+        position: relative;
+        &:after{
+          content: "";
+          width: 12px;
+          height: 1px;
+          display: inline-block;
+          animation: hasguangbiaobox .5s infinite;
+          position: absolute;
+          bottom: 0;
+          right: -20px;
+        }
+      }
+    }
+  }
+}
+@keyframes hasguangbiaobox {
+  from {
+    background: rgba(255, 255, 255, .6);
+  }
+  to {
+    background: rgba(255, 255, 255, 0);
+  }
 }
 

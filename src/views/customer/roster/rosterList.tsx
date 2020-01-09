@@ -200,7 +200,7 @@ class RosterList extends Component<any,any> {
 
         <div className="bg-white pl-20 pr-20">
           <div className="table-operations">
-            <div className="table-operations-left-test">合计<span className="text-danger">{tableComone.totalRows}</span>条</div>
+            <div className="table-operations-left-test">合计<span className="text-danger pl-4 pr-4">{tableComone.totalRows}</span>条</div>
           </div>
           <Table
             columns={columns}

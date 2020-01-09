@@ -15,7 +15,7 @@ type SiderCustomProps = RouteComponentProps<any> & {
 };
 type SiderCustomState = {
   collapsed?: boolean | undefined;
-  openKey: any;
+  openKey: string;
   firstHide: boolean | undefined;
   selectedKey: string;
   mode: string;
@@ -27,7 +27,7 @@ class SiderCustom extends Component<SiderCustomProps, SiderCustomState> {
     super(props);
     this.state = {
       mode: 'inline',
-      openKey: [],
+      openKey: '',
       selectedKey: '',
       firstHide: true, // 点击收缩菜单，第一次隐藏展开子菜单，openMenu时恢复
     };
@@ -37,13 +37,13 @@ class SiderCustom extends Component<SiderCustomProps, SiderCustomState> {
     if (this.props.collapsed !== this.state.collapsed) {
       const { collapsed, location } = this.props;
       const { pathname } = location;
-      // this.setState({
-      //   openKey: pathname.substr(0, pathname.lastIndexOf('/')),
-      //   selectedKey: pathname,
-      //   collapsed,
-      //   mode: collapsed ? 'vertical' : 'inline',
-      //   firstHide: collapsed,
-      // });
+      this.setState({
+        openKey: pathname.substr(0, pathname.lastIndexOf('/')),
+        selectedKey: pathname,
+        collapsed,
+        mode: collapsed ? 'vertical' : 'inline',
+        firstHide: collapsed,
+      });
     }
   }
 
@@ -57,7 +57,7 @@ class SiderCustom extends Component<SiderCustomProps, SiderCustomState> {
   openMenu = (v: string[]) => {
     console.log('🧞‍ v[v.length - 1]: ', v[v.length - 1], ', 🥁 v: ', v)
     this.setState({
-      openKey: v,
+      openKey: v[v.length - 1],
       firstHide: false,
     });
   };
@@ -80,7 +80,7 @@ class SiderCustom extends Component<SiderCustomProps, SiderCustomState> {
           mode="inline"
           // selectedKeys={[selectedKey]}
           selectedKeys={[path]}
-          openKeys={firstHide ? [] : openKey}
+          openKeys={firstHide ? [] : [openKey]}
           onOpenChange={this.openMenu}
         />
         <style>

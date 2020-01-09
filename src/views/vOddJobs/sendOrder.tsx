@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import { Form, Col, Select, Input, Icon, Table, Button, Popconfirm, message, DatePicker } from 'antd'
 import PolicySupportApi from '@/api/PolicySupport.api'
 
-class EmployeeAccount extends Component<any,any> {
+class SendOrder extends Component<any,any> {
   constructor(props:any) {
     super(props)
   };
@@ -12,10 +12,10 @@ class EmployeeAccount extends Component<any,any> {
   render () {
     return (
       <div className="cont-wrap">
-        <p>嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻嘻</p>
+        <p>派单管理</p>
       </div>
     )
   }
 }
 
-export default EmployeeAccount
+export default SendOrder
