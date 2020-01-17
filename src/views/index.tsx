@@ -6,6 +6,7 @@ import NotFound from './aside/NotFound';
 import About from './aside/about';
 import Roster from './customer/roster/rosterList';
 import RosterDetail from './customer/roster/rosterDetail';
+import BankCashArrival from './customer/bankCashArrival/bankCashArrivalList';
 import PolicySupportList from './policySupport/policySupportList';
 import WorkPlan from './dailyManage/workPlan/workPlan';
 import EmployeeAccount from './account/employeeAccount';
@@ -22,6 +23,7 @@ export default {
     About,
     Roster,
     RosterDetail,
+    BankCashArrival,
     PolicySupportList,
     WorkPlan,
     EmployeeAccount,

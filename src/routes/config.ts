@@ -42,6 +42,7 @@ const menus: {
       subs: [
         { key: 'rosterList', link: '/app/customer/rosterList', title: '花名册', component: 'Roster' },
         { key: 'rosterDetail', link: '/app/customer/rosterDetail', title: '员工详情', component: 'RosterDetail', hidden: true },
+        { key: 'bankCashArrivalList', link: '/app/customer/bankCashArrivalList', title: '银行到款管理', component: 'BankCashArrival' },
         // { key: 'employeeAccount', link: '/app/customer/account/employeeAccount', title: '员工账号', component: 'EmployeeAccount', hidden: true },
         // {
         //   key: 'account',
@@ -87,11 +88,11 @@ const menus: {
       key: 'aside',
       link: '/app/aside',
       title: '其他/范例',
-      icon: 'appstore',
+      icon: 'tool',
       subs: [
-        { key: 'todo', link: '/app/todo', title: 'todo', icon: 'home', component: 'Todo' },
-        { key: 'gaojie1', link: '/app/gaojie1', title: '高阶组件1', icon: 'home', component: 'Gaojie1', hidden: true },
-        { key: 'gaojie2', link: '/app/gaojie2', title: '高阶组件2', icon: 'home', component: 'Gaojie2', hidden: true }
+        { key: 'todo', link: '/app/todo', title: 'todo', icon: 'build', component: 'Todo' },
+        { key: 'gaojie1', link: '/app/gaojie1', title: '高阶组件1', icon: 'tool', component: 'Gaojie1', hidden: true },
+        { key: 'gaojie2', link: '/app/gaojie2', title: '高阶组件2', icon: 'tool', component: 'Gaojie2', hidden: true }
       ]
     },
   ],

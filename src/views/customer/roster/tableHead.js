@@ -42,7 +42,10 @@ export const rosterListThead = [
   },
   {
     title: '创建时间',
-    dataIndex: 'createTime'
+    dataIndex: 'createTime',
+    render: (text, record) => (
+      <span>{record.createTime ? record.createTime.substr(0, 10) : ''}</span>
+    )
   }
 ]
 

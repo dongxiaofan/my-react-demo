@@ -3,6 +3,8 @@ import { Form, Row, Col, Select, Input, Icon, Table, Button, Popconfirm, message
 // import { Link, withRouter} from "react-router-dom"
 import tool from '@/lib/tool'
 import moment from 'moment'
+import 'moment/locale/zh-cn'
+moment.locale('zh-cn')
 import WorkDayPlanApi from '@/api/WorkDayPlan.api'
 import '@/assets/styles/dailyManage.scss'
 // import ReactQuill from 'react-quill'; // ES6

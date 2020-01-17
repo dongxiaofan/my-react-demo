@@ -5,6 +5,8 @@ import { PolicySupportThead } from './tableHead'
 import { Link, withRouter} from "react-router-dom"
 import tool from '@/lib/tool'
 import moment from 'moment'
+import 'moment/locale/zh-cn'
+moment.locale('zh-cn')
 import ReNameModal from './modal/reNameModal'
 import CreateFileModal from './modal/createFileModal'
 import ImportModal from './modal/importModal'
@@ -377,7 +379,6 @@ class PolicySupportList extends Component<any,any> {
                       <Form.Item label={item.label}>
                         <DatePicker
                           disabledDate={this.disabledStartDate}
-                          showTime
                           format="YYYY-MM-DD"
                           placeholder="开始时间"
                           onChange={this.dateOnStartChange}
@@ -386,7 +387,6 @@ class PolicySupportList extends Component<any,any> {
                         <span> 至 </span>
                         <DatePicker
                           disabledDate={this.disabledEndDate}
-                          showTime
                           format="YYYY-MM-DD"
                           placeholder="结束时间"
                           onChange={this.onEndChange}

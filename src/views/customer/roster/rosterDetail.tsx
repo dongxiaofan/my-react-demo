@@ -6,6 +6,8 @@ import BreadcrumbCustom from '@/components/layout/BreadcrumbCustom'
 import { Link, withRouter} from "react-router-dom"
 import tool from '@/lib/tool'
 import moment from 'moment'
+import 'moment/locale/zh-cn'
+moment.locale('zh-cn')
 
 const { Option } = Select
 // 员工基本信息form
