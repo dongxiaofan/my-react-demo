@@ -14,6 +14,7 @@ import CustomerAccount from './account/customerAccount';
 import SupplierAccount from './account/supplierAccount';
 import SendOrder from './vOddJobs/sendOrder';
 import Todo from './example/todo';
+import CssEffects from './example/cssEffects';
 import Gaojie1 from './example/gaojie1';
 import Gaojie2 from './example/gaojie2';
 
@@ -31,6 +32,7 @@ export default {
     SupplierAccount,
     SendOrder,
     Todo,
+    CssEffects,
     Gaojie1,
     Gaojie2
 } as any;
