@@ -85,8 +85,20 @@ class Login extends React.Component<any, any> {
       ]
     }
 
+    let getSnow = (num) => {
+      var res:any = [];
+      for (var i = 0; i < num; i++) {
+        res.push(<div key={i} className="snow">x</div>)
+      }
+      return res
+    }
+
 		return (
 			<div className="login">
+        <div className="snow-wrap">
+          { getSnow(30) }
+        </div>
+
 				<div className="login-form">
 					<div className="login-title">欢迎登录</div>
 
