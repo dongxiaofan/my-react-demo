@@ -33,8 +33,8 @@ module.exports = function(proxy, allowedHost) {
     public: allowedHost,
     proxy: {
       '/api': {
-        target: 'http://10.10.10.117:81/api', // 本地环境(hro)
-        // target: 'http://www.vxhro.com:81/api', // 测试环境(hro)
+        // target: 'http://10.10.10.117:81/api', // 本地环境(hro)
+        target: 'http://www.vxhro.com:81/api', // 测试环境(hro)
         // target: 'https://www.vxhro.com/api', // 线上环境(hro)
         changeOrigin: true,
         ws: false,

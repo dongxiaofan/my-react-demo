@@ -1,6 +1,6 @@
 // 数据接口地址
-var env = 'develop' // 本地测试时使用
-// var env = 'develop_online' // 本地测试时使用线上测试地址
+// var env = 'develop' // 本地测试时使用
+var env = 'develop_online' // 本地测试时使用线上测试地址
 // var env = 'build' // 测试打包发布时使用
 // var env = 'production' // 正式打包发布时使用
 
