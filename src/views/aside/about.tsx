@@ -92,7 +92,7 @@ class About extends Component<any,any> {
 
   render () {
     return (
-      <div className="cont-wrap">
+      <div className="cont-wrap bg-gray h-100">
         <TypingText source={text}></TypingText>
         {/* <span className="guangbiao"></span> */}
       </div>

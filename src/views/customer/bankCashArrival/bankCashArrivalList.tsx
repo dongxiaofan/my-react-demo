@@ -102,7 +102,7 @@ class BankCashArrival extends Component<any,any> {
 
   // 日期改变
   async handleDateChange (value:any, key:any) {
-    let formData = this.state.formData
+    let {formData} = this.state
     formData[key] = value
     await this.setState({
       formData
@@ -111,7 +111,7 @@ class BankCashArrival extends Component<any,any> {
 
   // 输入框数据双向绑定
   async handleInputChange (key, e) {
-    let formData = this.state.formData
+    let {formData} = this.state
     formData[key] = e.target.value
     await this.setState({
       formData

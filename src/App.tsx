@@ -20,35 +20,22 @@ class App extends Component<AppProps> {
     collapsed: false,
     title: '',
   };
+  
   componentWillMount() {
     const { setAlitaState } = this.props;
     let user,
       storageUser = localStorage.getItem('user');
     user = storageUser && JSON.parse(storageUser);
-    // user && receiveData(user, 'auth');
     user && setAlitaState({ stateName: 'auth', data: user });
-    // receiveData({a: 213}, 'auth');
-    // fetchData({funcName: 'admin', stateName: 'auth'});
     this.getClientWidth();
     window.onresize = () => {
       this.getClientWidth();
     };
   }
+
   componentDidMount() {
-    const openNotification = () => {
-      notification.open({
-        message: '博主-yezihaohao',
-        icon: <Icon type="smile-circle" style={{ color: 'red' }} />,
-        duration: 0,
-      });
-      localStorage.setItem('isFirst', JSON.stringify(true));
-    };
-    const storageFirst = localStorage.getItem('isFirst');
-    if (storageFirst) {
-      const isFirst = JSON.parse(storageFirst);
-      !isFirst && openNotification();
-    }
   }
+
   getClientWidth = () => {
     // 获取当前浏览器宽度并设置responsive管理响应式
     const { setAlitaState } = this.props;
@@ -57,11 +44,13 @@ class App extends Component<AppProps> {
     setAlitaState({ stateName: 'responsive', data: { isMobile: clientWidth <= 992 } });
     // receiveData({isMobile: clientWidth <= 992}, 'responsive');
   };
+
   toggle = () => {
     this.setState({
       collapsed: !this.state.collapsed,
     });
   };
+
   render() {
     const { title } = this.state;
     const { auth = { data: {} }, responsive = { data: {} } } = this.props;

@@ -23,28 +23,6 @@ class BaseHtml extends Component<any,any> {
     super(props)
     console.log('🌈 this.props: ', this.props)
   };
-  // state = {
-  //   tableData: [],
-  //   tableComone: {        
-  //     pageIndex: 1, // 页码
-  //     totalRows: 0, // 总条数
-  //     pageSize: 10, // 当前页面展示条数
-  //   },
-  //   formData: {
-  //     name: '',
-  //     userName: '',
-  //     phone: ''
-  //   },
-  //   endOpen: false,
-  //   currentRow: {},
-  //   selectedRowKeys: []
-  // };
-
-  // batchImportModal;
-  // createAccountModal;
-  // onRef = (ref, modal) => { // -> 获取整个Child元素
-  //   this[modal] = ref
-  // };
 
   render () {
     const formItemLayout = {

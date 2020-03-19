@@ -90,15 +90,16 @@ const menus: {
       title: '其他/范例',
       icon: 'tool',
       subs: [
-        { key: 'todo', link: '/app/todo', title: 'todo', icon: 'build', component: 'Todo' },
-        { key: 'cssEffects', link: '/app/cssEffects', title: 'css动画', icon: 'build', component: 'CssEffects' },
+        { key: 'todo', link: '/app/todo', title: 'todo', icon: 'coffee', component: 'Todo' },
+        { key: 'cssEffects', link: '/app/cssEffects', title: 'css动画', icon: 'fire', component: 'CssEffects' },
+        { key: 'about', link: '/app/about', title: '关于我', icon: 'crown', component: 'About' },
         { key: 'gaojie1', link: '/app/gaojie1', title: '高阶组件1', icon: 'tool', component: 'Gaojie1', hidden: true },
         { key: 'gaojie2', link: '/app/gaojie2', title: '高阶组件2', icon: 'tool', component: 'Gaojie2', hidden: true }
       ]
     },
   ],
   others: [
-    { key: 'about', link: '/app/about', title: '关于我', icon: 'about', component: 'About' }
+    { key: 'about', link: '/app/about', title: '关于我', icon: 'crown', component: 'About' }
   ], // 非菜单相关路由
 };
 
