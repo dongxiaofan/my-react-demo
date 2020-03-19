@@ -37,7 +37,7 @@ class Login extends React.Component<any, any> {
 
             setTimeout(() => {
               this.props.history.push('/app/home')
-            }, 3000)
+            })
           } else {
             message.error(res.message)
           }
