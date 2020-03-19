@@ -56,7 +56,7 @@ class Home extends Component<any, any> {
 
   // 获取数据统计
   async getDataScreen () {
-    let statsTotal = this.state.statsTotal
+    let {statsTotal} = this.state
     var params = {}
     let res = await WorkBenchApi.getDataScreen(params)
     if (res.success) {
@@ -73,7 +73,7 @@ class Home extends Component<any, any> {
 
   // 获取图标数据
   async getBills () {
-    let insuranceDatas = this.state.insuranceDatas
+    let {insuranceDatas} = this.state
     var params = {flag: 0}
     let res = await ReportApi.getBills(params)
     if (res.success) {
@@ -107,9 +107,7 @@ class Home extends Component<any, any> {
 
   // 获取中国地图合计信息
   async getInfoBy () {
-    let cityNameArr = this.state.cityNameArr
-    let chinaData = this.state.chinaData
-    let setChinaData = this.state.setChinaData
+    let {cityNameArr, chinaData, setChinaData} = this.state
   
     var params = {flag: 0}
     let res = await ReportApi.getInfoBy(params)
@@ -148,8 +146,7 @@ class Home extends Component<any, any> {
 
   // 有数据的省份赋地理经纬度
   queryCP () {
-    let geoCoordMap = this.state.geoCoordMap
-    let cityNameArr = this.state.cityNameArr
+    let {geoCoordMap, cityNameArr} = this.state
     // 有数据的省份赋地理经纬度
     var tempGeoCoordMap:any = []
     var mapFeatures = Features
@@ -203,22 +200,6 @@ class Home extends Component<any, any> {
             })}
           </Row>
         </div>
-
-        {/* <div className="home-echarts-wrap mb-20">
-          <Row>
-            <Col span={10}>
-              <div className="home-echarts-item">
-                <Gongjijin gongjijinTitle={this.state.gongjijinTitle} viewData={this.state.insuranceDatas}/>
-              </div>
-            </Col>
-
-            <Col span={14}>
-              <div className="home-echarts-item">
-                <Shebao shebaoTitle={this.state.shebaoTitle} viewData={this.state.insuranceDatas}/>
-              </div>
-            </Col>
-          </Row>
-        </div> */}
 
         <div className="home-echarts-wrap">
           <Row>

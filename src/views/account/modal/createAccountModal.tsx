@@ -137,7 +137,7 @@ class CreatAccountModal extends React.Component<any, any> {
 
   // 下拉框改变
   async handleSelectChange (value:any, key:any) {
-    let formData = this.state.formData
+    let {formData} = this.state
     formData[key] = value
     await this.setState({
       formData
@@ -146,7 +146,7 @@ class CreatAccountModal extends React.Component<any, any> {
 
   // 输入框数据双向绑定
   async handleInputChange (key, e) {
-    let formData = this.state.formData
+    let {formData} = this.state
     formData[key] = e.target.value
     await this.setState({
       formData

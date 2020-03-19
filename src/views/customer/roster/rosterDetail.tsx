@@ -148,8 +148,8 @@ class RosterDetail extends Component<any,any> {
   
   // 获取列表数据
   async query () {
-    let basicInfo = this.state.basicInfo
-    let formBasicData = this.state.formBasicData
+    let {basicInfo} = this.state
+    let {formBasicData} = this.state
     var params = {
       id: urlParams['id']
     }
@@ -188,7 +188,7 @@ class RosterDetail extends Component<any,any> {
 
   // 下拉框改变
   async handleSelectChange (value, model) {
-    let formBasicData = this.state.formBasicData
+    let {formBasicData} = this.state
     formBasicData[model] = value
     await this.setState({
       formBasicData
@@ -197,7 +197,7 @@ class RosterDetail extends Component<any,any> {
 
   // 输入框数据双向绑定
   async handleInputChange (model, e) {
-    let formBasicData = this.state.formBasicData
+    let {formBasicData} = this.state
     formBasicData[model] = e.target.value
     await this.setState({
       formBasicData
@@ -206,7 +206,7 @@ class RosterDetail extends Component<any,any> {
 
   // 时间选择
   async handleDatePickerChange (date, dateString, model) {
-    let formBasicData = this.state.formBasicData
+    let {formBasicData} = this.state
     formBasicData[model] = dateString
     await this.setState({
       formBasicData
@@ -215,7 +215,7 @@ class RosterDetail extends Component<any,any> {
   
   // 树选择
   async handleCascaderChange (value, selectedOptions, model) {
-    let formBasicData = this.state.formBasicData
+    let {formBasicData} = this.state
     formBasicData[model] = value
     await this.setState({
       formBasicData

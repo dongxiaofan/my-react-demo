@@ -66,15 +66,15 @@ class RosterList extends Component<any,any> {
   
   // 获取列表数据
   async query () {
-    let {tableComone, tableData} = this.state
+    let {tableComone, tableData, formData} = this.state
     var params = {
       isDue: false,
       isRetire: false,
-      name: this.state.formData.name,
-      idCardNo: this.state.formData.idCardNo,
-      companyName: this.state.formData.companyName,
+      name: formData.name,
+      idCardNo: formData.idCardNo,
+      companyName: formData.companyName,
       hRName: '',
-      beHiring: this.state.formData.beHiring,
+      beHiring: formData.beHiring,
       hasPaging: true,
       pageIndex: tableComone.pageIndex,
       pageSize: tableComone.pageSize,
