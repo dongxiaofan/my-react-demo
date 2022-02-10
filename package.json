@@ -204,7 +204,7 @@
     "husky": "^3.0.5",
     "less": "2.x",
     "less-loader": "^5.0.0",
-    "node-sass": "^4.13.0",
+    "node-sass": "^7.0.0",
     "reqwest": "^2.0.5",
     "sass-loader": "^8.0.0",
     "standard-version": "^7.0.0"
